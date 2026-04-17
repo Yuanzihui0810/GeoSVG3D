@@ -23,7 +23,7 @@ prior_to_type <- function(prior,
 }
 
 
-fit_one_gene_spde_neuronized_basic <- function(
+fit_one_gene <- function(
     y_g, B, lambda, N = 2000, BURN = 1000, thin = 1, mh_per_k = 1,
     
     kappa_g = 118, alpha_g = 2.5, xi_g0 = 0,
@@ -81,7 +81,7 @@ fit_one_gene_spde_neuronized_basic <- function(
   )
 }
 
-fit_all_genes_spde_neuronized_basic <- function(
+fit_all_genes <- function(
     Y, S, K = 50, knn = 10, h = NULL, 
     symmetric = TRUE, normalized_laplacian = FALSE,
     N = 2000, BURN = 1000, thin = 1, mh_per_k = 1,
@@ -113,7 +113,7 @@ fit_all_genes_spde_neuronized_basic <- function(
   tau2_g_init_vec <- expand_to_G(tau2_g_init)
   
   fit_one <- function(g) {
-    fit_one_gene_spde_neuronized_basic(
+    fit_one_gene(
       y_g = Y[, g], B = B_basis, lambda = lambda,
       N = N, BURN = BURN, thin = thin, mh_per_k = mh_per_k,
       kappa_g = kappa_g_vec[g], alpha_g = alpha_g_vec[g], xi_g0 = xi_g0_vec[g],
