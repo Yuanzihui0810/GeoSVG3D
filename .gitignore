@@ -2,3 +2,13 @@
 .Rhistory
 .RData
 .Ruserdata
+*.Rproj
+*.o
+*.so
+*.dll
+*.aux
+*.log
+*.out
+.DS_Store
+Thumbs.db
+data/
