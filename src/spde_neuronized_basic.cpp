@@ -28,14 +28,12 @@ inline double T_fun_np_scalar(const double t, const int type,
     return t;
   } else if (type == 2) {
     double z = 0.5 * t * std::abs(t) + 0.733 * t;
-    if (z > 50.0) z = 50.0;
     return std::exp(z);
   } else if (type == 3) {
     return (t > 0.0) ? t : 0.0;
   } else if (type == 4) {
     if (t > 0.0) {
       double z = 0.5 * t * t - 1.27 * t + 0.29;
-      if (z > 50.0) z = 50.0;
       return std::exp(z);
     } else {
       return 0.0;
@@ -127,36 +125,25 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
     const arma::vec& y_g,      // n x 1
     const arma::mat& B,        // n x K
     const arma::vec& lambda,   // K x 1
-    
-    // MCMC
     const int N,
     const int BURN,
     const int thin,
     const int mh_per_k,
-    
-    // gene-specific hyper-parameters
     const double kappa_g,
     const double alpha_g,
     const double xi_g0,
-    
-    // priors
     const double nu_g0,
     const double eta_g0_sq,
     const double m_g0,
     const double gamma_g0,
     const double a_g0,
     const double b_g0,
-    
-    // prior type / proposal
     const int prior_type,
     const double lam1,
     const double lam2,
     const double lam3,
     const double xi_prop_sd,
-    
     const int tau2_g_update,
-    
-    // initial values
     double mu_g,
     double sigma2_g,
     double tau2_g,
@@ -315,12 +302,10 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
     // Step 4. update tau_g^2
     // tau_g^2 | omega_g ~ IG(a_g0 + K/2, b_g0 + ||omega_g||^2/2)
     // ========================================================
-    {
-      if (tau2_g_update == 1) {
-        double shape_tau = a_g0 + 0.5 * K;
-        double rate_tau  = b_g0 + 0.5 * arma::dot(omega_g, omega_g);
-        tau2_g = 1.0 / R::rgamma(shape_tau, 1.0 / rate_tau);
-      }
+    if (tau2_g_update == 1) {
+      double shape_tau = a_g0 + 0.5 * K;
+      double rate_tau  = b_g0 + 0.5 * arma::dot(omega_g, omega_g);
+      tau2_g = 1.0 / R::rgamma(shape_tau, 1.0 / rate_tau);
     }
     
     // save

@@ -22,7 +22,9 @@ compute_laplacian <- function(W, normalized = FALSE) {
 
 compute_eigen <- function(L, K) {
   # find the smallest K+1 eigenvalues (remove λ0=0)
-  eig <- RSpectra::eigs_sym(L, k = K + 1, which = "SM")
+  eig <- RSpectra::eigs_sym(L, k = K + 1, which = "LM", sigma = 0)
+  # using "LR" can get the same result as matrix L is a real symmetric matrice 
+  #eig <- RSpectra::eigs_sym(L, k = K + 1, which = "SM")
   
   values <- eig$values
   vectors <- eig$vectors

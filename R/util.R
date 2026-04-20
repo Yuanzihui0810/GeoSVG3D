@@ -99,7 +99,7 @@ fit_all_genes <- function(
   L <- compute_laplacian(W, normalized = normalized_laplacian)
   eig <- compute_eigen(L, K = K)
   
-  B_basis <- eig$B
+  B_basis <- eig$U
   lambda <- eig$lambda
   G <- ncol(Y)
   
@@ -125,11 +125,13 @@ fit_all_genes <- function(
     )
   }
   
-  if (ncores <= 1L) {
-    fits <- lapply(seq_len(G), fit_one)
-  } else {
-    fits <- mclapply(seq_len(G), fit_one, mc.cores = ncores)
-  }
+  fits <- lapply(seq_len(G), fit_one)
+  
+  # if (ncores <= 1L) {
+  #   fits <- lapply(seq_len(G), fit_one)
+  # } else {
+  #   fits <- mclapply(seq_len(G), fit_one, mc.cores = ncores)
+  # }
   
   list(
     W = W,
