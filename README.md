@@ -87,7 +87,7 @@ fit <- fit_all_genes(
   knn = 10,
   N = 2000,
   BURN = 2000,
-  prior = "BL",
+  prior = "SpSL-L",
   ncores = 4,
   seed = 123
 )
