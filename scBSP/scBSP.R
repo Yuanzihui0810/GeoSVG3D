@@ -3,7 +3,7 @@ library(scBSP)
 library(data.table)
 library(Seurat)
 #------------------------------simulated data --------------------------------------
-# data_dir     <- "D:/github/GL-neuronized-svg/simulation/data"
+# data_dir     <- "D:/github/GeoSVG3D/simulation/data"
 # expr_file    <- file.path(data_dir, "log_counts.csv")
 # spatial_file <- file.path(data_dir, "coords.csv")
 # 
@@ -24,10 +24,10 @@ seed <- 1
 p_cutoff <- 0.05
 
 # RDS
-sim_rds_file <- file.path("D:/github/GL-neuronized-svg/simulation/data", 
+sim_rds_file <- file.path("D:/github/GeoSVG3D/simulation/data", 
                           paste0("simulation_data_seed", seed, ".rds"))
 # scBSP results are saved to:
-scbsp_dir <- "D:/github/GL-neuronized-svg/scBSP"
+scbsp_dir <- "D:/github/GeoSVG3D/scBSP"
 dir.create(scbsp_dir, recursive = TRUE, showWarnings = FALSE)
 scbsp_rds_file <- file.path(scbsp_dir, 
                             paste0("scbsp_simulation_results_seed", seed, ".rds"))
@@ -185,7 +185,7 @@ cat("Number of scBSP SVGs:", length(scbsp_svg_genes), "\n")
 # 7. Save scBSP results
 # ============================================================
 
-save_dir <- file.path("D:/github/GL-neuronized-svg/scBSP", gsub(" ", "_", cell_type))
+save_dir <- file.path("D:/github/GeoSVG3D/scBSP", gsub(" ", "_", cell_type))
 dir.create(save_dir, recursive = TRUE, showWarnings = FALSE)
 
 write.csv(

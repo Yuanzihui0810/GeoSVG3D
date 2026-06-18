@@ -11,7 +11,7 @@ rawdata_dir <- "D:/MERFISH/brain/Deep_STARMAP"
 out_dir <- "D:/MERFISH/brain/Deep_STARMAP/STAGATE_imputation_output/Peptidergic_neurons"
 prefix <- "Peptidergic_neurons"
 
-project_dir <- "D:/github/GL-neuronized-svg"
+project_dir <- "D:/github/GeoSVG3D"
 real_data_dir <- file.path(project_dir, "real_data")
 
 geosvg_rds <- file.path(real_data_dir, "output",

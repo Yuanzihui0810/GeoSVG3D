@@ -1,6 +1,6 @@
 library(data.table)
 
-file <- "D:/github/GL-neuronized-svg/real_data/bio/GO_overlap.tsv"
+file <- "D:/github/GeoSVG3D/real_data/bio/GO_overlap.tsv"
 
 # Read the file as text
 txt <- readLines(file, warn = FALSE)
@@ -50,7 +50,7 @@ library(ggplot2)
 # 1. Output directory
 # ============================================================
 
-out_dir <- paste0("D:/github/GL-neuronized-svg/real_data/bio")
+out_dir <- paste0("D:/github/GeoSVG3D/real_data/bio")
 
 dir.create(
   out_dir,
@@ -223,7 +223,7 @@ p_all <- ggplot(
   ) +
   labs(
     y = "Gene Set ID", #"Ranked GO term",
-    x = "Gene"
+    x = "SVG" #"Gene"
   ) +
   theme_classic(base_size = 10) +
   theme(

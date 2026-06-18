@@ -20,7 +20,7 @@ imputation_dir <- file.path(
 prefix <- "Peptidergic_neurons"
 
 # Output directories in the GitHub project
-project_dir <- "D:/github/GL-neuronized-svg"
+project_dir <- "D:/github/GeoSVG3D"
 real_data_dir <- file.path(project_dir, "real_data")
 
 tab_dir <- file.path(real_data_dir, "table")

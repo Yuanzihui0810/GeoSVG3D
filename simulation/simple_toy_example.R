@@ -593,10 +593,10 @@ simulate_svg_continuous_data <- function(
 # ============================================================
 
 #The simulated data save to:
-data_dir <- "D:/github/GL-neuronized-svg/simulation/data"
-# fig_dir <- "D:/github/GL-neuronized-svg/simulation/figures"
+data_dir <- "D:/github/GeoSVG3D/simulation/data"
+# fig_dir <- "D:/github/GeoSVG3D/simulation/figures"
 #The rds results save to:
-rds_dir <- "D:/github/GL-neuronized-svg/simulation/output"
+rds_dir <- "D:/github/GeoSVG3D/simulation/output"
 
 dir.create(data_dir, recursive = TRUE, showWarnings = FALSE)
 # dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)

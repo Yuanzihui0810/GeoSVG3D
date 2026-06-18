@@ -5,7 +5,7 @@ library(pROC)
 # 1. Read saved results
 # ============================================================
 
-project_dir <- "D:/github/GL-neuronized-svg"
+project_dir <- "D:/github/GeoSVG3D"
 seed <- 1
 
 geosvg_res <- readRDS(file.path(
@@ -238,6 +238,17 @@ plot_simulated_Y_patterns_3d_each_plot3D(
   color_transform = "log1p"
 )
 
+plot_simulated_Y_patterns_3d_each_plot3D(
+  sim,
+  genes = c(1, 31, 61, 91, 101, 111),
+  output_dir = file.path(fig_dir, "plot3D"),
+  file_type = "png",
+  point_cex = 0.5,
+  theta = 305,
+  phi = 40,
+  color_transform = "log1p"
+)
+
 # ============================================================
 # 3. Detection performance table
 # ============================================================
@@ -312,46 +323,58 @@ roc_scbsp_df <- roc_scbsp_df[
 auc_geosvg <- as.numeric(auc(roc_geosvg))
 auc_scbsp <- as.numeric(auc(roc_scbsp))
 
+draw_roc_curve <- function() {
+  par(mar = c(5, 5, 3, 2))
+  
+  plot(
+    roc_geosvg_df$FPR,
+    roc_geosvg_df$TPR,
+    type = "s",
+    xlim = c(0, 0.5),
+    ylim = c(0, 1),
+    lwd = 2.5,
+    col = "red",
+    xlab = "False positive rate",
+    ylab = "True positive rate",
+    main = "ROC curve"
+  )
+  
+  lines(
+    roc_scbsp_df$FPR,
+    roc_scbsp_df$TPR,
+    type = "s",
+    lwd = 2.5,
+    col = "blue"
+  )
+  
+  legend(
+    "bottomright",
+    legend = c(
+      paste0("GeoSVG-3D, AUC = ", sprintf("%.4f", auc_geosvg)),
+      paste0("scBSP, AUC = ", sprintf("%.4f", auc_scbsp))
+    ),
+    col = c("red", "blue"),
+    lwd = 2.5,
+    bty = "n"
+  )
+}
+
 pdf(
   file.path(fig_dir, "sim_roc_auc.pdf"),
   width = 5.5,
   height = 5.5
 )
+draw_roc_curve()
+dev.off()
 
-par(mar = c(5, 5, 3, 2))
-
-plot(
-  roc_geosvg_df$FPR,
-  roc_geosvg_df$TPR,
-  type = "s",
-  xlim = c(0, 0.5),
-  ylim = c(0, 1),
-  lwd = 2.5,
-  col = "red",
-  xlab = "False positive rate",
-  ylab = "True positive rate",
-  main = "ROC curve"
+png(
+  filename = file.path(fig_dir, "sim_roc_auc.png"),
+  width = 5.5,
+  height = 5.5,
+  units = "in",
+  res = 300
 )
-
-lines(
-  roc_scbsp_df$FPR,
-  roc_scbsp_df$TPR,
-  type = "s",
-  lwd = 2.5,
-  col = "blue"
-)
-
-legend(
-  "bottomright",
-  legend = c(
-    paste0("GeoSVG-3D, AUC = ", sprintf("%.4f", auc_geosvg)),
-    paste0("scBSP, AUC = ", sprintf("%.4f", auc_scbsp))
-  ),
-  col = c("red", "blue"),
-  lwd = 2.5,
-  bty = "n"
-)
-
+draw_roc_curve()
 dev.off()
 
 auc_table <- data.frame(
