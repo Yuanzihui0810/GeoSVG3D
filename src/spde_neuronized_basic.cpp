@@ -11,13 +11,14 @@ using namespace arma;
 // type = 2 : HS      -> T(t) = exp(0.5*sign(t)*t^2 + 0.733*t)
 // type = 3 : SpSL-L  -> T(t) = max(0, t)
 // type = 4 : SpSL-C  -> T(t) = exp(0.5*t^2 - 1.27*t + 0.29) * 1(t>0)
-// type = 5 : custom continuous (abs-quadratic)
+// type = 5 : SpSL-G  -> T(t) = I(t > 0)
+// type = 6 : custom continuous (abs-quadratic)
 //            T(t) = exp(lam1 * t * |t| + lam2 * t + lam3)
-// type = 6 : custom continuous (quadratic)
+// type = 7 : custom continuous (quadratic)
 //            T(t) = exp(lam1 * t^2 + lam2 * t + lam3)
-// type = 7 : custom thresholded (abs-quadratic)
+// type = 8 : custom thresholded (abs-quadratic)
 //            T(t) = exp(lam1 * t * |t| + lam2 * t + lam3) * I(t > 0)
-// type = 8 : custom thresholded (quadratic)
+// type = 9 : custom thresholded (quadratic)
 //            T(t) = exp(lam1 * t^2 + lam2 * t + lam3) * I(t > 0)
 // ============================================================
 inline double T_fun_np_scalar(const double t, const int type,
@@ -38,17 +39,19 @@ inline double T_fun_np_scalar(const double t, const int type,
     } else {
       return 0.0;
     }
-  } else if (type == 5) {   // custom continuous: exp(lam1 * t|t| + lam2 * t + lam3)
+  } else if (type == 5) {
+    return (t > 0.0) ? 1 : 0.0;
+  } else if (type == 6) {   // custom continuous: exp(lam1 * t|t| + lam2 * t + lam3)
     double z = lam1 * t * std::abs(t) + lam2 * t + lam3;
     return std::exp(z);
-  }else if (type == 6) {   // custom continuous: exp(lam1 * t^2 + lam2 * t + lam3)
+  }else if (type == 7) {   // custom continuous: exp(lam1 * t^2 + lam2 * t + lam3)
     double z = lam1 * t * t + lam2 * t + lam3;
     return std::exp(z);
-  }else if (type == 7) {   // custom thresholded: exp(lam1 * t|t| + lam2 * t + lam3) * I(t>0)
+  }else if (type == 8) {   // custom thresholded: exp(lam1 * t|t| + lam2 * t + lam3) * I(t>0)
     if (t <= 0.0) return 0.0;
     double z = lam1 * t * std::abs(t) + lam2 * t + lam3;
     return std::exp(z);
-  }else if (type == 8) {   // custom thresholded: exp(lam1 * t^2 + lam2 * t + lam3) * I(t>0)
+  }else if (type == 9) {   // custom thresholded: exp(lam1 * t^2 + lam2 * t + lam3) * I(t>0)
     if (t <= 0.0) return 0.0;
     double z = lam1 * t * t + lam2 * t + lam3;
     return std::exp(z);
@@ -78,11 +81,13 @@ arma::vec T_fun_np_vec(const arma::vec& t, const int type,
       out.elem(ind) = arma::exp(0.5 * tp % tp - 1.27 * tp + 0.29);
     }
     return out;
-  } else if (type == 5) {   // custom continuous abs-quadratic
+  }else if (type == 5) {
+    return arma::conv_to<arma::vec>::from(t > 0.0);
+  } else if (type == 6) {   // custom continuous abs-quadratic
     return arma::exp(lam1 * (t % arma::abs(t)) + lam2 * t + lam3);
-  }else if (type == 6) {   // custom continuous quadratic
+  }else if (type == 7) {   // custom continuous quadratic
     return arma::exp(lam1 * (t % t) + lam2 * t + lam3);
-  }else if (type == 7) {   // custom thresholded abs-quadratic
+  }else if (type == 8) {   // custom thresholded abs-quadratic
     out.zeros();
     arma::uvec ind = arma::find(t > 0.0);
     if (!ind.is_empty()) {
@@ -90,7 +95,7 @@ arma::vec T_fun_np_vec(const arma::vec& t, const int type,
       out.elem(ind) = arma::exp(lam1 * (tp % arma::abs(tp)) + lam2 * tp + lam3);
     }
     return out;
-  }else if (type == 8) {   // custom thresholded quadratic
+  }else if (type == 9) {   // custom thresholded quadratic
     out.zeros();
     arma::uvec ind = arma::find(t > 0.0);
     if (!ind.is_empty()) {
@@ -164,7 +169,8 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
   // If B columns are orthonormal Laplacian eigenvectors,
   // || s_gk * u_k ||^2 = s_gk^2.
   // This avoids recomputing column norms every iteration.
-  arma::vec x_norm2 = arma::square(s_g);
+  arma::vec u_norm2 = arma::sum(arma::square(B), 0).t();
+  arma::vec x_norm2 = arma::square(s_g); //* u_norm2;
   
   // ----------------------------------------------------------
   // vectorized initialization
@@ -176,6 +182,9 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
   arma::vec one_n(n, fill::ones);
   arma::vec fit_g = B * theta_g;
   arma::vec res_g = y_g - mu_g * one_n - fit_g;
+  // arma::vec fit_g = B * theta_g;
+  // arma::vec res_g = y_g - fit_g;
+  // res_g -= mu_g;
   
   // storage size
   const int n_keep = (N <= 0) ? 0 : ((N - 1) / thin + 1);
@@ -193,40 +202,14 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
   for (int iter = 0; iter < N_total; ++iter) {
     
     // ========================================================
-    // Step 1. update mu_g
-    // mu_g | rest ~ N(v_mu_g * [1^T(y_g - B theta_g)/sigma2_g + nu_g0/eta_g0_sq], v_mu_g)
-    // Since y_g - B theta_g = res_g + mu_g * 1_n
-    // ========================================================
-    {
-      double v_mu_g = 1.0 / ( (double)n / sigma2_g + 1.0 / eta_g0_sq );
-      double sum_y_minus_Btheta = arma::sum(res_g) + n * mu_g;
-      double m_mu_g = v_mu_g * ( sum_y_minus_Btheta / sigma2_g + nu_g0 / eta_g0_sq );
-      
-      double mu_g_new = R::rnorm(m_mu_g, std::sqrt(v_mu_g));
-      
-      // res_new = y - mu_new 1 - B theta = res_old - (mu_new - mu_old) 1
-      res_g -= (mu_g_new - mu_g);
-      mu_g = mu_g_new;
-    }
-    
-    // ========================================================
-    // Step 2. update sigma_g^2
-    // sigma_g^2 | rest ~ IG(m_g0 + n/2, gamma_g0 + ||res_g||^2 / 2)
-    // ========================================================
-    {
-      double shape_sig = m_g0 + 0.5 * n;
-      double rate_sig = gamma_g0 + 0.5 * arma::dot(res_g, res_g);
-      sigma2_g = 1.0 / R::rgamma(shape_sig, 1.0 / rate_sig);
-    }
-    
-    // ========================================================
-    // Step 3. for k = 1,...,K:
+    // Step 1. for k = 1,...,K:
     //         (a) marginalized MH for xi_gk
     //         (b) Gibbs for omega_gk
     // ========================================================
     for (int k = 0; k < K; ++k) {
       
-      const arma::vec u_k = B.col(k);
+      // const arma::vec u_k = B.col(k);
+      auto u_k = B.col(k);
       
       // remove current k contribution:
       // res_g becomes y_g - mu_g 1_n - sum_{l != k} u_l theta_gl
@@ -237,7 +220,7 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
       double rx_gk = s_g(k) * arma::dot(u_k, res_g);
       
       // ------------------------------------------------------
-      // Step 3(a). marginalized MH for xi_gk
+      // Step 1(a). marginalized MH for xi_gk
       //
       // This is the same NPrior-style target structure:
       //   -0.5 log( ||x_gk||^2 T^2 + sigma2_g/tau2_g )
@@ -277,7 +260,7 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
       }
       
       // ------------------------------------------------------
-      // Step 3(b). Gibbs for omega_gk
+      // Step 1(b). Gibbs for omega_gk
       //
       // a_gk = s_gk * T(xi_gk - xi_g0)
       //
@@ -287,7 +270,7 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
       // ------------------------------------------------------
       {
         double a_gk = s_g(k) * act_g(k);
-        double Sigma_wgk = 1.0 / ( (a_gk * a_gk) / sigma2_g + 1.0 / tau2_g );
+        double Sigma_wgk = 1.0 / ( (a_gk * a_gk) / sigma2_g + 1.0 / tau2_g ); //* u_norm2(k)
         double nu_wgk = Sigma_wgk * ( a_gk * arma::dot(u_k, res_g) / sigma2_g );
         
         omega_g(k) = R::rnorm(nu_wgk, std::sqrt(Sigma_wgk));
@@ -297,6 +280,34 @@ Rcpp::List spde_neuronized_basic_one_gene_cpp(
       // add updated k contribution back
       res_g -= u_k * theta_g(k);
     }
+    
+    // ========================================================
+    // Step 2. update mu_g
+    // mu_g | rest ~ N(v_mu_g * [1^T(y_g - B theta_g)/sigma2_g + nu_g0/eta_g0_sq], v_mu_g)
+    // Since y_g - B theta_g = res_g + mu_g * 1_n
+    // ========================================================
+    {
+      double v_mu_g = 1.0 / ( (double)n / sigma2_g + 1.0 / eta_g0_sq );
+      double sum_y_minus_Btheta = arma::sum(res_g) + n * mu_g;
+      double m_mu_g = v_mu_g * ( sum_y_minus_Btheta / sigma2_g + nu_g0 / eta_g0_sq );
+      
+      double mu_g_new = R::rnorm(m_mu_g, std::sqrt(v_mu_g));
+      
+      // res_new = y - mu_new 1 - B theta = res_old - (mu_new - mu_old) 1
+      res_g -= (mu_g_new - mu_g);
+      mu_g = mu_g_new;
+    }
+    
+    // ========================================================
+    // Step 3. update sigma_g^2
+    // sigma_g^2 | rest ~ IG(m_g0 + n/2, gamma_g0 + ||res_g||^2 / 2)
+    // ========================================================
+    {
+      double shape_sig = m_g0 + 0.5 * n;
+      double rate_sig = gamma_g0 + 0.5 * arma::dot(res_g, res_g);
+      sigma2_g = 1.0 / R::rgamma(shape_sig, 1.0 / rate_sig);
+    }
+    
     
     // ========================================================
     // Step 4. update tau_g^2

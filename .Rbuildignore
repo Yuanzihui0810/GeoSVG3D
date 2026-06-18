@@ -1,0 +1,9 @@
+^simulation$
+^real_data$
+^scBSP$
+^\.Rproj\.user$
+^\.RData$
+^\.Rhistory$
+^.*\.Rproj$
+^\.ipynb_checkpoints$
+^\.idea$

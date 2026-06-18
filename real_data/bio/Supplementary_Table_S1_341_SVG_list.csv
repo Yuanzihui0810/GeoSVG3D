@@ -1,0 +1,342 @@
+"Entrez Gene ID","Gene symbol","Gene description","Number of enriched GO terms"
+12918,"Crh","corticotropin releasing hormone [Source:MGI Symbol;Acc:MGI:88496]",55
+109648,"Npy","neuropeptide Y [Source:MGI Symbol;Acc:MGI:97374]",44
+19699,"Reln","reelin [Source:MGI Symbol;Acc:MGI:103022]",49
+12424,"Cck","cholecystokinin [Source:MGI Symbol;Acc:MGI:88297]",40
+20370,"Sez6","seizure related gene 6 [Source:MGI Symbol;Acc:MGI:104745]",18
+22226,"Ucn","urocortin [Source:MGI Symbol;Acc:MGI:1276123]",55
+193034,"Trpv1","transient receptor potential cation channel, subfamily V, member 1 [Source:MGI Symbol;Acc:MGI:1341787]",61
+18216,"Ntsr1","neurotensin receptor 1 [Source:MGI Symbol;Acc:MGI:97386]",44
+11539,"Adora1","adenosine A1 receptor [Source:MGI Symbol;Acc:MGI:99401]",60
+14805,"Grik1","glutamate receptor, ionotropic, kainate 1 [Source:MGI Symbol;Acc:MGI:95814]",37
+20618,"Sncg","synuclein, gamma [Source:MGI Symbol;Acc:MGI:1298397]",17
+432530,"Adcy1","adenylate cyclase 1 [Source:MGI Symbol;Acc:MGI:99677]",19
+64011,"Nrgn","neurogranin [Source:MGI Symbol;Acc:MGI:1927184]",16
+14654,"Glra1","glycine receptor, alpha 1 subunit [Source:MGI Symbol;Acc:MGI:95747]",31
+18752,"Prkcg","protein kinase C, gamma [Source:MGI Symbol;Acc:MGI:97597]",23
+21336,"Tacr1","tachykinin receptor 1 [Source:MGI Symbol;Acc:MGI:98475]",45
+15559,"Htr2b","5-hydroxytryptamine (serotonin) receptor 2B [Source:MGI Symbol;Acc:MGI:109323]",32
+15560,"Htr2c","5-hydroxytryptamine (serotonin) receptor 2C [Source:MGI Symbol;Acc:MGI:96281]",39
+51791,"Rgs14","regulator of G-protein signaling 14 [Source:MGI Symbol;Acc:MGI:1859709]",19
+110834,"Chrna3","cholinergic receptor, nicotinic, alpha polypeptide 3 [Source:MGI Symbol;Acc:MGI:87887]",33
+110886,"Gabra5","gamma-aminobutyric acid type A receptor subunit alpha 5 [Source:MGI Symbol;Acc:MGI:95617]",26
+18429,"Oxt","oxytocin [Source:MGI Symbol;Acc:MGI:97453]",40
+18166,"Npy1r","neuropeptide Y receptor Y1 [Source:MGI Symbol;Acc:MGI:104963]",34
+72961,"Slc17a7","solute carrier family 17 (sodium-dependent inorganic phosphate cotransporter), member 7 [Source:MGI Symbol;Acc:MGI:1920211]",22
+54615,"Npff","neuropeptide FF-amide peptide precursor [Source:MGI Symbol;Acc:MGI:1891708]",35
+108058,"Camk2d","calcium/calmodulin-dependent protein kinase II, delta [Source:MGI Symbol;Acc:MGI:1341265]",34
+15114,"Hap1","huntingtin-associated protein 1 [Source:MGI Symbol;Acc:MGI:1261831]",32
+16504,"Kcnc3","potassium voltage gated channel, Shaw-related subfamily, member 3 [Source:MGI Symbol;Acc:MGI:96669]",30
+216227,"Slc17a8","solute carrier family 17 (sodium-dependent inorganic phosphate cotransporter), member 8 [Source:MGI Symbol;Acc:MGI:3039629]",23
+12672,"Chrm4","cholinergic receptor, muscarinic 4 [Source:MGI Symbol;Acc:MGI:88399]",19
+20538,"Slc6a2","solute carrier family 6 (neurotransmitter transporter, noradrenalin), member 2 [Source:MGI Symbol;Acc:MGI:1270850]",21
+19293,"Pvalb","parvalbumin [Source:MGI Symbol;Acc:MGI:97821]",6
+12669,"Chrm1","cholinergic receptor, muscarinic 1, CNS [Source:MGI Symbol;Acc:MGI:88396]",27
+108069,"Grm3","glutamate receptor, metabotropic 3 [Source:MGI Symbol;Acc:MGI:1351340]",15
+76161,"Lamp5","lysosomal-associated membrane protein family, member 5 [Source:MGI Symbol;Acc:MGI:1923411]",12
+12308,"Calb2","calbindin 2 [Source:MGI Symbol;Acc:MGI:101914]",10
+243312,"Elfn1","leucine rich repeat and fibronectin type III, extracellular 1 [Source:MGI Symbol;Acc:MGI:2442479]",14
+11542,"Adora3","adenosine A3 receptor [Source:MGI Symbol;Acc:MGI:104847]",27
+13841,"Epha7","Eph receptor A7 [Source:MGI Symbol;Acc:MGI:95276]",31
+110304,"Glra3","glycine receptor, alpha 3 subunit [Source:MGI Symbol;Acc:MGI:95749]",22
+12802,"Cnr2","cannabinoid receptor 2 [Source:MGI Symbol;Acc:MGI:104650]",20
+213788,"Chrm5","cholinergic receptor, muscarinic 5 [Source:MGI Symbol;Acc:MGI:109248]",19
+20508,"Slc18a3","solute carrier family 18 (vesicular monoamine), member 3 [Source:MGI Symbol;Acc:MGI:1101061]",22
+235415,"Cplx3","complexin 3 [Source:MGI Symbol;Acc:MGI:2384571]",17
+140559,"Igsf8","immunoglobulin superfamily, member 8 [Source:MGI Symbol;Acc:MGI:2154090]",13
+140919,"Slc17a6","solute carrier family 17 (sodium-dependent inorganic phosphate cotransporter), member 6 [Source:MGI Symbol;Acc:MGI:2156052]",15
+108043,"Chrnb3","cholinergic receptor, nicotinic, beta polypeptide 3 [Source:MGI Symbol;Acc:MGI:106212]",18
+22353,"Vip","vasoactive intestinal polypeptide [Source:MGI Symbol;Acc:MGI:98933]",28
+225642,"Grp","gastrin releasing peptide [Source:MGI Symbol;Acc:MGI:95833]",23
+18133,"Ccn3","cellular communication network factor 3 [Source:MGI Symbol;Acc:MGI:109185]",40
+12374,"Casr","calcium-sensing receptor [Source:MGI Symbol;Acc:MGI:1351351]",49
+109731,"Maob","monoamine oxidase B [Source:MGI Symbol;Acc:MGI:96916]",14
+13380,"Dkk1","dickkopf WNT signaling pathway inhibitor 1 [Source:MGI Symbol;Acc:MGI:1329040]",31
+110312,"Pmch","pro-melanin-concentrating hormone [Source:MGI Symbol;Acc:MGI:97629]",20
+16590,"Kit","KIT proto-oncogene receptor tyrosine kinase [Source:MGI Symbol;Acc:MGI:96677]",31
+12426,"Cckbr","cholecystokinin B receptor [Source:MGI Symbol;Acc:MGI:99479]",21
+11554,"Adrb1","adrenergic receptor, beta 1 [Source:MGI Symbol;Acc:MGI:87937]",48
+13048,"Cux2","cut-like homeobox 2 [Source:MGI Symbol;Acc:MGI:107321]",17
+18013,"Neurod2","neurogenic differentiation 2 [Source:MGI Symbol;Acc:MGI:107755]",18
+21926,"Tnf","tumor necrosis factor [Source:MGI Symbol;Acc:MGI:104798]",58
+54377,"Cacng4","calcium channel, voltage-dependent, gamma subunit 4 [Source:MGI Symbol;Acc:MGI:1859167]",27
+12405,"Cbln2","cerebellin 2 precursor protein [Source:MGI Symbol;Acc:MGI:88282]",8
+228942,"Cbln4","cerebellin 4 precursor protein [Source:MGI Symbol;Acc:MGI:2154433]",7
+226359,"C1ql2","complement component 1, q subcomponent-like 2 [Source:MGI Symbol;Acc:MGI:3032521]",4
+11541,"Adora2b","adenosine A2b receptor [Source:MGI Symbol;Acc:MGI:99403]",34
+19736,"Rgs4","regulator of G-protein signaling 4 [Source:MGI Symbol;Acc:MGI:108409]",32
+56808,"Cacna2d2","calcium channel, voltage-dependent, alpha 2/delta subunit 2 [Source:MGI Symbol;Acc:MGI:1929813]",19
+114229,"Kiss1r","KISS1 receptor [Source:MGI Symbol;Acc:MGI:2148793]",17
+18231,"Nxph1","neurexophilin 1 [Source:MGI Symbol;Acc:MGI:107492]",5
+104080,"Nxph4","neurexophilin 4 [Source:MGI Symbol;Acc:MGI:1336197]",5
+107995,"Cdc20","cell division cycle 20 [Source:MGI Symbol;Acc:MGI:1859866]",9
+319229,"Sctr","secretin receptor [Source:MGI Symbol;Acc:MGI:2441720]",9
+70274,"Ly6g6e","lymphocyte antigen 6 family member  G6E [Source:MGI Symbol;Acc:MGI:1917524]",9
+110454,"Ly6a","lymphocyte antigen 6 family member A [Source:MGI Symbol;Acc:MGI:107527]",6
+57249,"Gabrq","gamma-aminobutyric acid type A receptor subunit theta [Source:MGI Symbol;Acc:MGI:1888498]",11
+18976,"Pomc","pro-opiomelanocortin-alpha [Source:MGI Symbol;Acc:MGI:97742]",32
+14602,"Ghrhr","growth hormone releasing hormone receptor [Source:MGI Symbol;Acc:MGI:95710]",26
+11548,"Adra1b","adrenergic receptor, alpha 1b [Source:MGI Symbol;Acc:MGI:104774]",27
+17773,"Mtnr1a","melatonin receptor 1A [Source:MGI Symbol;Acc:MGI:102967]",10
+16323,"Inhba","inhibin beta-A [Source:MGI Symbol;Acc:MGI:96570]",35
+22413,"Wnt2","wingless-type MMTV integration site family, member 2 [Source:MGI Symbol;Acc:MGI:98954]",25
+19662,"Rbp4","retinol binding protein 4, plasma [Source:MGI Symbol;Acc:MGI:97879]",23
+20666,"Sox11","SRY (sex determining region Y)-box 11 [Source:MGI Symbol;Acc:MGI:98359]",29
+18510,"Pax8","paired box 8 [Source:MGI Symbol;Acc:MGI:97492]",21
+399548,"Scn4b","sodium channel, type IV, beta [Source:MGI Symbol;Acc:MGI:2687406]",18
+15402,"Hoxa5","homeobox A5 [Source:MGI Symbol;Acc:MGI:96177]",17
+19283,"Ptprz1","protein tyrosine phosphatase receptor type Z, polypeptide 1 [Source:MGI Symbol;Acc:MGI:97816]",31
+11486,"Ada","adenosine deaminase [Source:MGI Symbol;Acc:MGI:87916]",38
+11998,"Avp","arginine vasopressin [Source:MGI Symbol;Acc:MGI:88121]",37
+13162,"Slc6a3","solute carrier family 6 (neurotransmitter transporter, dopamine), member 3 [Source:MGI Symbol;Acc:MGI:94862]",32
+18386,"Oprd1","opioid receptor, delta 1 [Source:MGI Symbol;Acc:MGI:97438]",28
+18217,"Ntsr2","neurotensin receptor 2 [Source:MGI Symbol;Acc:MGI:108018]",12
+93688,"Klhl1","kelch-like 1 [Source:MGI Symbol;Acc:MGI:2136335]",9
+12759,"Clu","clusterin [Source:MGI Symbol;Acc:MGI:88423]",27
+20346,"Sema3a","sema domain, immunoglobulin domain (Ig), short basic domain, secreted, (semaphorin) 3A [Source:MGI Symbol;Acc:MGI:107558]",29
+14585,"Gfra1","glial cell line derived neurotrophic factor family receptor alpha 1 [Source:MGI Symbol;Acc:MGI:1100842]",13
+12628,"Cfh","complement component factor h [Source:MGI Symbol;Acc:MGI:88385]",16
+18948,"Pnmt","phenylethanolamine-N-methyltransferase [Source:MGI Symbol;Acc:MGI:97724]",8
+14417,"Gad2","glutamic acid decarboxylase 2 [Source:MGI Symbol;Acc:MGI:95634]",10
+12311,"Calcr","calcitonin receptor [Source:MGI Symbol;Acc:MGI:101950]",15
+11658,"Alcam","activated leukocyte cell adhesion molecule [Source:MGI Symbol;Acc:MGI:1313266]",10
+216343,"Tph2","tryptophan hydroxylase 2 [Source:MGI Symbol;Acc:MGI:2651811]",4
+74762,"Mdga1","MAM domain containing glycosylphosphatidylinositol anchor 1 [Source:MGI Symbol;Acc:MGI:1922012]",20
+240058,"Cpne5","copine V [Source:MGI Symbol;Acc:MGI:2385908]",7
+15186,"Hdc","histidine decarboxylase [Source:MGI Symbol;Acc:MGI:96062]",4
+11898,"Ass1","argininosuccinate synthetase 1 [Source:MGI Symbol;Acc:MGI:88090]",9
+320415,"Gchfr","GTP cyclohydrolase I feedback regulator [Source:MGI Symbol;Acc:MGI:2443977]",3
+16177,"Il1r1","interleukin 1 receptor, type I [Source:MGI Symbol;Acc:MGI:96545]",15
+17926,"Myoc","myocilin [Source:MGI Symbol;Acc:MGI:1202864]",20
+12554,"Cdh13","cadherin 13 [Source:MGI Symbol;Acc:MGI:99551]",22
+13003,"Vcan","versican [Source:MGI Symbol;Acc:MGI:102889]",11
+65086,"Lpar3","lysophosphatidic acid receptor 3 [Source:MGI Symbol;Acc:MGI:1929469]",22
+18595,"Pdgfra","platelet derived growth factor receptor, alpha polypeptide [Source:MGI Symbol;Acc:MGI:97530]",30
+22784,"Slc30a3","solute carrier family 30 (zinc transporter), member 3 [Source:MGI Symbol;Acc:MGI:1345280]",13
+13797,"Emx2","empty spiracles homeobox 2 [Source:MGI Symbol;Acc:MGI:95388]",10
+23920,"Insrr","insulin receptor-related receptor [Source:MGI Symbol;Acc:MGI:1346037]",6
+73420,"Ccsap","centriole, cilia and spindle associated protein [Source:MGI Symbol;Acc:MGI:1920670]",3
+19739,"Rgs9","regulator of G-protein signaling 9 [Source:MGI Symbol;Acc:MGI:1338824]",22
+19065,"Npy4r","neuropeptide Y receptor Y4 [Source:MGI Symbol;Acc:MGI:105374]",3
+226304,"Npbwr1","neuropeptides B/W receptor 1 [Source:MGI Symbol;Acc:MGI:891989]",3
+11604,"Agrp","agouti related neuropeptide [Source:MGI Symbol;Acc:MGI:892013]",21
+16819,"Lcn2","lipocalin 2 [Source:MGI Symbol;Acc:MGI:96757]",25
+12854,"Cort","cortistatin [Source:MGI Symbol;Acc:MGI:109538]",14
+217212,"Pyy","peptide YY [Source:MGI Symbol;Acc:MGI:99924]",10
+18124,"Nr4a3","nuclear receptor subfamily 4, group A, member 3 [Source:MGI Symbol;Acc:MGI:1352457]",30
+11556,"Adrb3","adrenergic receptor, beta 3 [Source:MGI Symbol;Acc:MGI:87939]",24
+12444,"Ccnd2","cyclin D2 [Source:MGI Symbol;Acc:MGI:88314]",14
+244958,"Mrap2","melanocortin 2 receptor accessory protein 2 [Source:MGI Symbol;Acc:MGI:3609239]",10
+433292,"Nms","neuromedin S [Source:MGI Symbol;Acc:MGI:3583618]",4
+54713,"Fezf2","Fez family zinc finger 2 [Source:MGI Symbol;Acc:MGI:1859823]",15
+114142,"Foxp2","forkhead box P2 [Source:MGI Symbol;Acc:MGI:2148705]",11
+18516,"Pbx3","pre B cell leukemia homeobox 3 [Source:MGI Symbol;Acc:MGI:97496]",7
+53324,"Nptx2","neuronal pentraxin 2 [Source:MGI Symbol;Acc:MGI:1858209]",7
+268890,"Lsamp","limbic system-associated membrane protein [Source:MGI Symbol;Acc:MGI:1261760]",8
+109593,"Lmo3","LIM domain only 3 [Source:MGI Symbol;Acc:MGI:102810]",12
+387285,"Hcrtr2","hypocretin (orexin) receptor 2 [Source:MGI Symbol;Acc:MGI:2680765]",8
+76574,"Mfsd2a","MFSD2 lysolipid transporter A, lysophospholipid [Source:MGI Symbol;Acc:MGI:1923824]",12
+13798,"En1","engrailed 1 [Source:MGI Symbol;Acc:MGI:95389]",10
+21375,"Tbr1","T-box brain transcription factor 1 [Source:MGI Symbol;Acc:MGI:107404]",11
+16875,"Lhx8","LIM homeobox protein 8 [Source:MGI Symbol;Acc:MGI:1096343]",7
+14009,"Etv1","ets variant 1 [Source:MGI Symbol;Acc:MGI:99254]",4
+11846,"Arg1","arginase, liver [Source:MGI Symbol;Acc:MGI:88070]",13
+20604,"Sst","somatostatin [Source:MGI Symbol;Acc:MGI:98326]",17
+18573,"Pde1a","phosphodiesterase 1A, calmodulin-dependent [Source:MGI Symbol;Acc:MGI:1201792]",6
+16149,"Cd74","CD74 antigen (invariant polypeptide of major histocompatibility complex, class II antigen-associated) [Source:MGI Symbol;Acc:MGI:96534]",25
+193740,"Hspa1a","heat shock protein 1A [Source:MGI Symbol;Acc:MGI:96244]",21
+11535,"Adm","adrenomedullin [Source:MGI Symbol;Acc:MGI:108058]",33
+22402,"Ccn4","cellular communication network factor 4 [Source:MGI Symbol;Acc:MGI:1197008]",23
+76905,"Lrg1","leucine-rich alpha-2-glycoprotein 1 [Source:MGI Symbol;Acc:MGI:1924155]",28
+20354,"Sema4d","sema domain, immunoglobulin domain (Ig), transmembrane domain (TM) and short cytoplasmic domain, (semaphorin) 4D [Source:MGI Symbol;Acc:MGI:109244]",28
+16956,"Lpl","lipoprotein lipase [Source:MGI Symbol;Acc:MGI:96820]",12
+22371,"Vwf","Von Willebrand factor [Source:MGI Symbol;Acc:MGI:98941]",9
+13386,"Dlk1","delta like non-canonical Notch ligand 1 [Source:MGI Symbol;Acc:MGI:94900]",14
+338352,"Nell1","NEL-like 1 [Source:MGI Symbol;Acc:MGI:2443902]",7
+240725,"Sulf1","sulfatase 1 [Source:MGI Symbol;Acc:MGI:2138563]",26
+72043,"Sulf2","sulfatase 2 [Source:MGI Symbol;Acc:MGI:1919293]",13
+16008,"Igfbp2","insulin-like growth factor binding protein 2 [Source:MGI Symbol;Acc:MGI:96437]",13
+17304,"Mfge8","milk fat globule EGF and factor V/VIII domain containing [Source:MGI Symbol;Acc:MGI:102768]",12
+56744,"Pf4","platelet factor 4 [Source:MGI Symbol;Acc:MGI:1888711]",25
+13590,"Lefty1","left right determination factor 1 [Source:MGI Symbol;Acc:MGI:107405]",14
+12825,"Col3a1","collagen, type III, alpha 1 [Source:MGI Symbol;Acc:MGI:88453]",26
+72780,"Rspo3","R-spondin 3 [Source:MGI Symbol;Acc:MGI:1920030]",8
+110075,"Bmp3","bone morphogenetic protein 3 [Source:MGI Symbol;Acc:MGI:88179]",6
+50781,"Dkk3","dickkopf WNT signaling pathway inhibitor 3 [Source:MGI Symbol;Acc:MGI:1354952]",5
+17390,"Mmp2","matrix metallopeptidase 2 [Source:MGI Symbol;Acc:MGI:97009]",31
+20692,"Sparc","secreted acidic cysteine rich glycoprotein [Source:MGI Symbol;Acc:MGI:98373]",20
+320460,"Vwc2l","von Willebrand factor C domain-containing protein 2-like [Source:MGI Symbol;Acc:MGI:2444069]",10
+13179,"Dcn","decorin [Source:MGI Symbol;Acc:MGI:94872]",22
+16012,"Igfbp6","insulin-like growth factor binding protein 6 [Source:MGI Symbol;Acc:MGI:96441]",7
+16010,"Igfbp4","insulin-like growth factor binding protein 4 [Source:MGI Symbol;Acc:MGI:96439]",5
+19124,"Procr","protein C receptor, endothelial [Source:MGI Symbol;Acc:MGI:104596]",2
+110595,"Timp4","tissue inhibitor of metalloproteinase 4 [Source:MGI Symbol;Acc:MGI:109125]",3
+16790,"Anpep","alanyl aminopeptidase, membrane [Source:MGI Symbol;Acc:MGI:5000466]",9
+12351,"Car4","carbonic anhydrase 4 [Source:MGI Symbol;Acc:MGI:1096574]",4
+12831,"Col5a1","collagen, type V, alpha 1 [Source:MGI Symbol;Acc:MGI:88457]",11
+12950,"Hapln1","hyaluronan and proteoglycan link protein 1 [Source:MGI Symbol;Acc:MGI:1337006]",5
+64075,"Smoc1","SPARC related  modular calcium binding 1 [Source:MGI Symbol;Acc:MGI:1929878]",4
+17313,"Mgp","matrix Gla protein [Source:MGI Symbol;Acc:MGI:96976]",6
+235130,"Adamts15","ADAM metallopeptidase with thrombospondin type 1 motif 15 [Source:MGI Symbol;Acc:MGI:2449569]",4
+76293,"Mfap4","microfibrillar-associated protein 4 [Source:MGI Symbol;Acc:MGI:1342276]",4
+12816,"Col12a1","collagen, type XII, alpha 1 [Source:MGI Symbol;Acc:MGI:88448]",4
+11576,"Afp","alpha fetoprotein [Source:MGI Symbol;Acc:MGI:87951]",1
+109323,"C1qtnf7","C1q and tumor necrosis factor related protein 7 [Source:MGI Symbol;Acc:MGI:1925911]",1
+14778,"Gpx3","glutathione peroxidase 3 [Source:MGI Symbol;Acc:MGI:105102]",1
+109222,"Rarres1","retinoic acid receptor responder (tazarotene induced) 1 [Source:MGI Symbol;Acc:MGI:1924461]",1
+329093,"Cpa6","carboxypeptidase A6 [Source:MGI Symbol;Acc:MGI:3045348]",1
+76703,"Cpb1","carboxypeptidase B1 [Source:MGI Symbol;Acc:MGI:1923953]",1
+241639,"Fermt1","fermitin family member 1 [Source:MGI Symbol;Acc:MGI:2443583]",18
+12534,"Cdk1","cyclin dependent kinase 1 [Source:MGI Symbol;Acc:MGI:88351]",10
+66402,"Sln","sarcolipin [Source:MGI Symbol;Acc:MGI:1913652]",11
+18997,"Pou4f2","POU domain, class 4, transcription factor 2 [Source:MGI Symbol;Acc:MGI:102524]",24
+12189,"Brca1","breast cancer 1, early onset [Source:MGI Symbol;Acc:MGI:104537]",17
+20356,"Sema5a","sema domain, seven thrombospondin repeats (type 1 and type 1-like), transmembrane domain (TM) and short cytoplasmic domain, (semaphorin) 5A [Source:MGI Symbol;Acc:MGI:107556]",32
+50501,"Prok2","prokineticin 2 [Source:MGI Symbol;Acc:MGI:1354178]",12
+22062,"Trp73","transformation related protein 73 [Source:MGI Symbol;Acc:MGI:1336991]",13
+231633,"Tmem119","transmembrane protein 119 [Source:MGI Symbol;Acc:MGI:2385228]",13
+66175,"Mustn1","musculoskeletal, embryonic nuclear protein 1 [Source:MGI Symbol;Acc:MGI:1913425]",9
+70584,"Pak4","p21 (RAC1) activated kinase 4 [Source:MGI Symbol;Acc:MGI:1917834]",10
+15415,"Hoxb7","homeobox B7 [Source:MGI Symbol;Acc:MGI:96188]",6
+106512,"Gpsm3","G-protein signalling modulator 3 (AGS3-like, C. elegans) [Source:MGI Symbol;Acc:MGI:2146785]",5
+56490,"Zbtb20","zinc finger and BTB domain containing 20 [Source:MGI Symbol;Acc:MGI:1929213]",1
+242653,"Cldn19","claudin 19 [Source:MGI Symbol;Acc:MGI:3033992]",9
+20928,"Abcc9","ATP-binding cassette, sub-family C member 9 [Source:MGI Symbol;Acc:MGI:1352630]",29
+11517,"Adcyap1r1","adenylate cyclase activating polypeptide 1 receptor 1 [Source:MGI Symbol;Acc:MGI:108449]",18
+16538,"Kcns1","K+ voltage-gated channel, subfamily S, 1 [Source:MGI Symbol;Acc:MGI:1197019]",11
+241794,"Kcng1","potassium voltage-gated channel, subfamily G, member 1 [Source:MGI Symbol;Acc:MGI:3616086]",11
+170790,"Mlc1","megalencephalic leukoencephalopathy with subcortical cysts 1 homolog (human) [Source:MGI Symbol;Acc:MGI:2157910]",9
+16533,"Kcnmb1","potassium large conductance calcium-activated channel, subfamily M, beta member 1 [Source:MGI Symbol;Acc:MGI:1334203]",16
+217154,"Stac2","SH3 and cysteine rich domain 2 [Source:MGI Symbol;Acc:MGI:2144518]",10
+16499,"Kcnab3","potassium voltage-gated channel, shaker-related subfamily, beta member 3 [Source:MGI Symbol;Acc:MGI:1336208]",10
+58187,"Cldn10","claudin 10 [Source:MGI Symbol;Acc:MGI:1913101]",4
+17311,"Kitl","kit ligand [Source:MGI Symbol;Acc:MGI:96974]",9
+12062,"Bdkrb2","bradykinin receptor, beta 2 [Source:MGI Symbol;Acc:MGI:102845]",16
+24117,"Wif1","Wnt inhibitory factor 1 [Source:MGI Symbol;Acc:MGI:1344332]",7
+209195,"Clic6","chloride intracellular channel 6 [Source:MGI Symbol;Acc:MGI:2146607]",7
+212108,"Rln3","relaxin 3 [Source:MGI Symbol;Acc:MGI:2158015]",5
+20491,"Sla","src-like adaptor [Source:MGI Symbol;Acc:MGI:104295]",2
+73191,"Fezf1","Fez family zinc finger 1 [Source:MGI Symbol;Acc:MGI:1920441]",11
+16477,"Junb","jun B proto-oncogene [Source:MGI Symbol;Acc:MGI:96647]",10
+17005,"Ltk","leukocyte tyrosine kinase [Source:MGI Symbol;Acc:MGI:96840]",9
+14715,"Gnrhr","gonadotropin releasing hormone receptor [Source:MGI Symbol;Acc:MGI:95790]",4
+72080,"Sapcd2","suppressor APC domain containing 2 [Source:MGI Symbol;Acc:MGI:1919330]",4
+226896,"Tfap2d","transcription factor AP-2, delta [Source:MGI Symbol;Acc:MGI:2153466]",3
+76281,"Tax1bp3","Tax1 (human T cell leukemia virus type I) binding protein 3 [Source:MGI Symbol;Acc:MGI:1923531]",4
+233406,"Prc1","protein regulator of cytokinesis 1 [Source:MGI Symbol;Acc:MGI:1858961]",2
+240690,"St18","suppression of tumorigenicity 18 [Source:MGI Symbol;Acc:MGI:2446700]",1
+109594,"Lmo1","LIM domain only 1 [Source:MGI Symbol;Acc:MGI:102812]",1
+12797,"Cnn1","calponin 1 [Source:MGI Symbol;Acc:MGI:104979]",1
+211578,"Mrgprd","MAS-related GPR, member D [Source:MGI Symbol;Acc:MGI:3033142]",12
+27140,"Tlx3","T cell leukemia, homeobox 3 [Source:MGI Symbol;Acc:MGI:1351209]",7
+21955,"Tnnt1","troponin T1, skeletal, slow [Source:MGI Symbol;Acc:MGI:1333868]",5
+243616,"Slc6a11","solute carrier family 6 (neurotransmitter transporter, GABA), member 11 [Source:MGI Symbol;Acc:MGI:95630]",15
+72160,"Tmem163","transmembrane protein 163 [Source:MGI Symbol;Acc:MGI:1919410]",9
+170930,"Sumo2","small ubiquitin-like modifier 2 [Source:MGI Symbol;Acc:MGI:2158813]",3
+20088,"Rps24","ribosomal protein S24 [Source:MGI Symbol;Acc:MGI:98147]",2
+21413,"Tcf4","transcription factor 4 [Source:MGI Symbol;Acc:MGI:98506]",13
+13390,"Dlx1","distal-less homeobox 1 [Source:MGI Symbol;Acc:MGI:94901]",15
+13392,"Dlx2","distal-less homeobox 2 [Source:MGI Symbol;Acc:MGI:94902]",13
+56089,"Ramp3","receptor (calcitonin) activity modifying protein 3 [Source:MGI Symbol;Acc:MGI:1860292]",16
+381489,"Rxfp1","relaxin/insulin-like family peptide receptor 1 [Source:MGI Symbol;Acc:MGI:2682211]",7
+211468,"Kcnh8","potassium voltage-gated channel, subfamily H (eag-related), member 8 [Source:MGI Symbol;Acc:MGI:2445160]",9
+72413,"Kcnmb2","potassium large conductance calcium-activated channel, subfamily M, beta member 2 [Source:MGI Symbol;Acc:MGI:1919663]",9
+67473,"Slc47a1","solute carrier family 47, member 1 [Source:MGI Symbol;Acc:MGI:1914723]",9
+14412,"Slc6a13","solute carrier family 6 (neurotransmitter transporter, GABA), member 13 [Source:MGI Symbol;Acc:MGI:95629]",9
+245526,"Pgr15l","G protein-coupled receptor 15-like [Source:MGI Symbol;Acc:MGI:2676330]",2
+13599,"Ecel1","endothelin converting enzyme-like 1 [Source:MGI Symbol;Acc:MGI:1343461]",1
+75404,"Arhgap36","Rho GTPase activating protein 36 [Source:MGI Symbol;Acc:MGI:1922654]",5
+50916,"Irx4","Iroquois homeobox 4 [Source:MGI Symbol;Acc:MGI:1355275]",3
+225998,"Rorb","RAR-related orphan receptor beta [Source:MGI Symbol;Acc:MGI:1343464]",7
+20669,"Sox14","SRY (sex determining region Y)-box 14 [Source:MGI Symbol;Acc:MGI:98362]",7
+74237,"Tubgcp2","tubulin, gamma complex component 2 [Source:MGI Symbol;Acc:MGI:1921487]",5
+11922,"Neurod6","neurogenic differentiation 6 [Source:MGI Symbol;Acc:MGI:106593]",4
+241134,"Nyap2","neuronal tyrosine-phophorylated phosphoinositide 3-kinase adaptor 2 [Source:MGI Symbol;Acc:MGI:2443135]",3
+212712,"Satb2","special AT-rich sequence binding protein 2 [Source:MGI Symbol;Acc:MGI:2679336]",5
+22239,"Ugt8a","UDP galactosyltransferase 8A [Source:MGI Symbol;Acc:MGI:109522]",3
+18164,"Nptx1","neuronal pentraxin 1 [Source:MGI Symbol;Acc:MGI:107811]",2
+100532,"Rell1","RELT-like 1 [Source:MGI Symbol;Acc:MGI:2140767]",3
+547253,"Parp14","poly (ADP-ribose) polymerase family, member 14 [Source:MGI Symbol;Acc:MGI:1919489]",3
+76747,"Dapl1","death associated protein-like 1 [Source:MGI Symbol;Acc:MGI:1923997]",2
+18710,"Pik3r3","phosphoinositide-3-kinase regulatory subunit 3 [Source:MGI Symbol;Acc:MGI:109277]",10
+50766,"Crim1","cysteine rich transmembrane BMP regulator 1 [Source:MGI Symbol;Acc:MGI:1354756]",6
+20183,"Rxrg","retinoid X receptor gamma [Source:MGI Symbol;Acc:MGI:98216]",4
+71897,"Lypd6b","LY6/PLAUR domain containing 6B [Source:MGI Symbol;Acc:MGI:1919147]",1
+230751,"Oscp1","organic solute carrier partner 1 [Source:MGI Symbol;Acc:MGI:1916308]",3
+17528,"Mpz","myelin protein zero [Source:MGI Symbol;Acc:MGI:103177]",2
+67182,"Pdzk1ip1","PDZK1 interacting protein 1 [Source:MGI Symbol;Acc:MGI:1914432]",1
+21393,"Tcap","titin-cap [Source:MGI Symbol;Acc:MGI:1330233]",9
+54132,"Pdlim1","PDZ and LIM domain 1 (elfin) [Source:MGI Symbol;Acc:MGI:1860611]",4
+17064,"Cd93","CD93 antigen [Source:MGI Symbol;Acc:MGI:106664]",6
+12411,"Cbs","cystathionine beta-synthase [Source:MGI Symbol;Acc:MGI:88285]",11
+77799,"Sla2","Src-like-adaptor 2 [Source:MGI Symbol;Acc:MGI:1925049]",3
+236920,"Stard8","StAR related lipid transfer domain containing 8 [Source:MGI Symbol;Acc:MGI:2448556]",2
+15405,"Hoxa9","homeobox A9 [Source:MGI Symbol;Acc:MGI:96180]",5
+77583,"Notum","notum palmitoleoyl-protein carboxylesterase [Source:MGI Symbol;Acc:MGI:1924833]",4
+241201,"Cdh7","cadherin 7, type 2 [Source:MGI Symbol;Acc:MGI:2442792]",3
+245827,"Fat2","FAT atypical cadherin 2 [Source:MGI Symbol;Acc:MGI:2685369]",3
+73284,"Ddit4l","DNA-damage-inducible transcript 4-like [Source:MGI Symbol;Acc:MGI:1920534]",2
+14776,"Gpx2","glutathione peroxidase 2 [Source:MGI Symbol;Acc:MGI:106609]",1
+381229,"Cfap58","cilia and flagella associated protein 58 [Source:MGI Symbol;Acc:MGI:2685815]",1
+70426,"Tekt5","tektin 5 [Source:MGI Symbol;Acc:MGI:1917676]",1
+75429,"Cfap144","cilia and flagella associated protein 144 [Source:MGI Symbol;Acc:MGI:1922679]",1
+17533,"Mrc1","mannose receptor, C type 1 [Source:MGI Symbol;Acc:MGI:97142]",2
+407790,"Ndufa4l2","Ndufa4, mitochondrial complex associated like 2 [Source:MGI Symbol;Acc:MGI:3039567]",1
+11744,"Anxa11","annexin A11 [Source:MGI Symbol;Acc:MGI:108481]",2
+12823,"Col19a1","collagen, type XIX, alpha 1 [Source:MGI Symbol;Acc:MGI:1095415]",2
+12810,"Coch","cochlin [Source:MGI Symbol;Acc:MGI:1278313]",1
+71355,"Col24a1","collagen, type XXIV, alpha 1 [Source:MGI Symbol;Acc:MGI:1918605]",1
+140703,"Emid1","EMI domain containing 1 [Source:MGI Symbol;Acc:MGI:2155091]",1
+73368,"Col20a1","collagen, type XX, alpha 1 [Source:MGI Symbol;Acc:MGI:1920618]",1
+16426,"Itih3","inter-alpha trypsin inhibitor, heavy chain 3 [Source:MGI Symbol;Acc:MGI:96620]",1
+15413,"Hoxb5","homeobox B5 [Source:MGI Symbol;Acc:MGI:96186]",2
+17345,"Mki67","antigen identified by monoclonal antibody Ki 67 [Source:MGI Symbol;Acc:MGI:106035]",1
+17285,"Meox1","mesenchyme homeobox 1 [Source:MGI Symbol;Acc:MGI:103220]",1
+13008,"Csrp2","cysteine and glycine-rich protein 2 [Source:MGI Symbol;Acc:MGI:1202907]",1
+19153,"Prx","periaxin [Source:MGI Symbol;Acc:MGI:108176]",1
+66898,"Baiap2l1","BAI1-associated protein 2-like 1 [Source:MGI Symbol;Acc:MGI:1914148]",1
+12971,"Crym","crystallin, mu [Source:MGI Symbol;Acc:MGI:102675]",0
+70337,"Iyd","iodotyrosine deiodinase [Source:MGI Symbol;Acc:MGI:1917587]",0
+195646,"Hs3st2","heparan sulfate (glucosamine) 3-O-sulfotransferase 2 [Source:MGI Symbol;Acc:MGI:1333802]",0
+13593,"Ebf3","early B cell factor 3 [Source:MGI Symbol;Acc:MGI:894289]",0
+20476,"Six6","sine oculis-related homeobox 6 [Source:MGI Symbol;Acc:MGI:1341840]",0
+20230,"Satb1","special AT-rich sequence binding protein 1 [Source:MGI Symbol;Acc:MGI:105084]",0
+80892,"Zfhx4","zinc finger homeodomain 4 [Source:MGI Symbol;Acc:MGI:2137668]",0
+70571,"Tcerg1l","transcription elongation regulator 1-like [Source:MGI Symbol;Acc:MGI:1917821]",0
+436062,"Cibar2","CBY1 interacting BAR domain containing 2 [Source:MGI Symbol;Acc:MGI:3588213]",0
+268482,"Krt12","keratin 12 [Source:MGI Symbol;Acc:MGI:96687]",0
+16675,"Krt27","keratin 27 [Source:MGI Symbol;Acc:MGI:1339999]",0
+16665,"Krt15","keratin 15 [Source:MGI Symbol;Acc:MGI:96689]",0
+68895,"Rasl11a","RAS-like, family 11, member A [Source:MGI Symbol;Acc:MGI:1916145]",0
+331374,"Dgkk","diacylglycerol kinase kappa [Source:MGI Symbol;Acc:MGI:3580254]",0
+22178,"Tyrp1","tyrosinase-related protein 1 [Source:MGI Symbol;Acc:MGI:98881]",0
+76487,"Ppp1r3g","protein phosphatase 1, regulatory subunit 3G [Source:MGI Symbol;Acc:MGI:1923737]",0
+53602,"Hpcal1","hippocalcin-like 1 [Source:MGI Symbol;Acc:MGI:1855689]",0
+216961,"Coro6","coronin 6 [Source:MGI Symbol;Acc:MGI:2183448]",0
+208213,"Tmem132c","transmembrane protein 132C [Source:MGI Symbol;Acc:MGI:2443061]",0
+68612,"Ube2c","ubiquitin-conjugating enzyme E2C [Source:MGI Symbol;Acc:MGI:1915862]",0
+14120,"Fbp2","fructose bisphosphatase 2 [Source:MGI Symbol;Acc:MGI:95491]",0
+433022,"Plcxd2","phosphatidylinositol-specific phospholipase C, X domain containing 2 [Source:MGI Symbol;Acc:MGI:3647874]",0
+21743,"Inmt","indolethylamine N-methyltransferase [Source:MGI Symbol;Acc:MGI:102963]",0
+77629,"Sphkap","SPHK1 interactor, AKAP domain containing [Source:MGI Symbol;Acc:MGI:1924879]",0
+628779,"Hs3st4","heparan sulfate (glucosamine) 3-O-sulfotransferase 4 [Source:MGI Symbol;Acc:MGI:1333792]",0
+64580,"Ndst4","N-deacetylase/N-sulfotransferase (heparin glucosaminyl) 4 [Source:MGI Symbol;Acc:MGI:1932545]",0
+280645,"B3gat2","beta-1,3-glucuronyltransferase 2 [Source:MGI Symbol;Acc:MGI:2389490]",0
+244745,"Dpy19l1","dpy-19 like C-mannosyltransferase 1 [Source:MGI Symbol;Acc:MGI:1915685]",0
+236285,"Lancl3","LanC lantibiotic synthetase component C-like 3 (bacterial) [Source:MGI Symbol;Acc:MGI:2443335]",0
+271970,"Arsj","arylsulfatase J [Source:MGI Symbol;Acc:MGI:2443513]",0
+319776,"Tmem72","transmembrane protein 72 [Source:MGI Symbol;Acc:MGI:2442707]",0
+78709,"Spink8","serine peptidase inhibitor, Kazal type 8 [Source:MGI Symbol;Acc:MGI:1925959]",0
+68310,"Zmym1","zinc finger, MYM domain containing 1 [Source:MGI Symbol;Acc:MGI:1915560]",0
+64293,"Stk32b","serine/threonine kinase 32B [Source:MGI Symbol;Acc:MGI:1927552]",0
+12319,"Car8","carbonic anhydrase 8 [Source:MGI Symbol;Acc:MGI:88253]",0
+75668,"Rasl10a","RAS-like, family 10, member A [Source:MGI Symbol;Acc:MGI:1922918]",0
+100042450,"Smim17","small integral membrane protein 17 [Source:MGI Symbol;Acc:MGI:4365374]",0
+224419,"Map3k7cl","Map3k7 C-terminal like [Source:MGI Symbol;Acc:MGI:2446584]",0
+272465,"Tmem255b","transmembrane protein 255B [Source:MGI Symbol;Acc:MGI:2685533]",0
+434197,"Fam169b","family with sequence similarity 169, member B [Source:MGI Symbol;Acc:MGI:3644026]",0
+545279,"Ms4a15","membrane-spanning 4-domains, subfamily A, member 15 [Source:MGI Symbol;Acc:MGI:3617853]",0
+545798,"Tmem233","transmembrane protein 233 [Source:MGI Symbol;Acc:MGI:3651514]",0
+66561,"Teddm3","transmembrane epididymal family member 3 [Source:MGI Symbol;Acc:MGI:1913811]",0
+73569,"Vgll3","vestigial like family member 3 [Source:MGI Symbol;Acc:MGI:1920819]",0
+74175,"Crct1","cysteine-rich C-terminal 1 [Source:MGI Symbol;Acc:MGI:1921425]",0

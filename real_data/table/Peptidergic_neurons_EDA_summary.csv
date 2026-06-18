@@ -1,0 +1,9 @@
+"metric","value"
+"n_cells",9212
+"n_genes",1017
+"raw_zero_proportion",0.953068354687635
+"imputed_zero_proportion",0.100980572986114
+"median_detected_genes_per_cell_raw",46
+"median_detected_genes_per_cell_imputed",955
+"median_gene_detection_fraction_raw",0.0142205818497612
+"median_gene_detection_fraction_imputed",0.918910117238385
