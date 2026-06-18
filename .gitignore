@@ -4,6 +4,7 @@ data/
 .Rproj.user/
 .Rhistory
 .RData
+.idea/
 .Ruserdata
 .ipynb_checkpoints/
 
