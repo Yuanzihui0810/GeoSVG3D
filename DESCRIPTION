@@ -2,13 +2,24 @@ Package: GeoSVG3D
 Type: Package
 Title: Geometry-Aware Bayesian Detection of Spatially Variable Genes in Three Dimensions
 Version: 0.1.0
-Authors@R:
+Authors@R: c(
     person(
         given = "Zihui",
         family = "Yuan",
         email = "yuanzihui0810@gmail.com",
         role = c("aut", "cre")
+    ),
+    person(
+        given = "Yinqiao",
+        family = "Yan",
+        role = "fnd"
+    ),
+    person(
+        given = "Xiangyu",
+        family = "Luo",
+        role = "fnd"
     )
+)
 Description: Implements a fully Bayesian framework for detecting spatially variable genes in three-dimensional spatial transcriptomics data. A weighted nearest-neighbor graph and graph Laplacian eigenvectors provide geometry-aware spatial basis functions. Gene-specific spatial effects are represented using SPDE-inspired spectral scaling and neuronized priors. Posterior evidence for spatial variation is summarized at the gene level, and Bayesian false discovery rate control is used to determine the final set of spatially variable genes.
 License: GPL-3
 Encoding: UTF-8
