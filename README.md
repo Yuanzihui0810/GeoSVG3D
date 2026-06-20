@@ -33,7 +33,7 @@ The rows of `Y` and `S` must correspond to the same cells or spots and must appe
 ``` r
 if(!require(devtools))
   install.packages(devtools)
-devtools::install_github(""Yuanzihui0810/GeoSVG3D"")
+devtools::install_github("Yuanzihui0810/GeoSVG3D")
 ```
 
 ## Quick start
