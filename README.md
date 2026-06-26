@@ -45,7 +45,7 @@ library(GeoSVG3D)
 
 set.seed(123)
 
-n <- 100
+n <- 200
 G <- 20
 
 S <- matrix(
@@ -65,7 +65,7 @@ fit <- fit_all_genes(
   Y = Y,
   S = S,
   K = 5,
-  knn = 10,
+  knn = 100,
   N = 2000,
   BURN = 2000,
   thin = 1,
@@ -93,7 +93,7 @@ fit <- fit_all_genes(
   Y = Y,
   S = S,
   K = 5,
-  knn = 10,
+  knn = 100,
   N = 2000,
   BURN = 2000,
   prior = "SpSL-L",
