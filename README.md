@@ -60,29 +60,19 @@ set.seed(123)
 n <- 200
 G <- 20
 
-S <- matrix(
-  runif(n * 3), nrow = n, ncol = 3,
-  dimnames = list(NULL, c("x", "y", "z"))
+S <- matrix(runif(n * 3), nrow = n, ncol = 3, dimnames = list(NULL, c("x", "y", "z"))
 )
 
-Y <- matrix(
-  rnorm(n * G), nrow = n, ncol = G
-)
+Y <- matrix(rnorm(n * G), nrow = n, ncol = G)
 
 fit <- GeoSVG3D(
-  Y = Y, S = S,
-  n_basis = 5, knn = 100,
-  n_iter = 2000, burn_in = 2000, thin = 1,
-  prior = "SpSL-L",
-  n_cores = 1, seed = 123
+  Y = Y, S = S, n_basis = 5, knn = 100, n_iter = 2000, burn_in = 2000, thin = 1,
+  prior = "SpSL-L", n_cores = 1, seed = 123
 )
 
 p0g <- compute_p0g(fit, tol = 0)
 
-bfdr_result <- select_svg_bfdr(
-  p0g = p0g,
-  alpha = 0.05
-)
+bfdr_result <- select_svg_bfdr(p0g = p0g, alpha = 0.05)
 
 which(bfdr_result$pred == 1L)
 ```
@@ -93,11 +83,8 @@ GeoSVG-3D fits the model separately for each gene, allowing gene-wise computatio
 
 ``` r
 fit <- GeoSVG3D(
-  Y = Y, S = S,
-  n_basis = 5, knn = 100,
-  n_iter = 2000, burn_in = 2000, thin = 1,
-  prior = "SpSL-L",
-  n_cores = 4, seed = 123
+  Y = Y, S = S, n_basis = 5, knn = 100, n_iter = 2000, burn_in = 2000, thin = 1,
+  prior = "SpSL-L", n_cores = 4, seed = 123
 )
 ```
 
