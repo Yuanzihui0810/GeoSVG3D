@@ -1,6 +1,10 @@
 .DS_Store
 Thumbs.db
 data/
+simulation/output/
+real_data/output/
+SPARK/output/
+SpatialDE/
 .Rproj.user/
 .Rhistory
 .RData

@@ -7,7 +7,7 @@
 run_svg_bfdr_pipeline(fit_res, truth, alpha = 0.05, tol = 0)
 }
 \arguments{
-\item{fit_res}{An object returned by \code{fit_all_genes()}.}
+\item{fit_res}{An object returned by \code{GeoSVG3D()}.}
 
 \item{truth}{Binary vector of true SVG labels used for performance
 evaluation.}

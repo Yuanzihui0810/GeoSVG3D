@@ -1,3 +1,5 @@
+library(GeoSVG3D)
+
 simulate_svg_continuous_data <- function(
     n = 10000,
     G = 1000,
@@ -8,15 +10,16 @@ simulate_svg_continuous_data <- function(
     zero_rate = 0,
     zero_rate_svg = zero_rate,
     zero_rate_non_svg = zero_rate,
-    mu_mean = 0.5,
+    mu_mean = 0,
     mu_sd = 1,
-    amp_gradient = 1,
-    amp_periodic = 1,
-    amp_gaussian = 1,
-    amp_composite = 1,
-    amp_granularity = 1,
+    amp_gradient = 2,    # 1
+    amp_periodic = 2,    # 1
+    amp_gaussian = 2,    # 1
+    amp_composite = 2,   # 1
+    amp_granularity = 2, # 1
     seed = 123
 ) {
+  seed = seed
   set.seed(seed)
   stopifnot(n_svg <= G)
   stopifnot(n_svg <= 120)
@@ -499,7 +502,7 @@ simulate_svg_continuous_data <- function(
   colnames(eta_true) <- gene_names
   
   eps <- matrix(0, nrow = n, ncol = G)
-  
+
   if (n_svg > 0) {
     eps[, seq_len(n_svg)] <- matrix(
       rnorm(n * n_svg, mean = 0, sd = sigma_eps),
@@ -507,16 +510,56 @@ simulate_svg_continuous_data <- function(
       ncol = n_svg
     )
   }
-  
+
   if (G > n_svg) {
     non_svg_idx <- (n_svg + 1):G
-    
+
     eps[, non_svg_idx] <- matrix(
       rnorm(n * length(non_svg_idx), mean = 0, sd = sigma_eps_non_svg),
       nrow = n,
       ncol = length(non_svg_idx)
     )
   }
+
+  # noise_df = 4
+  # eps <- matrix(0, nrow = n, ncol = G)
+  # 
+  # # Standardization factor for Student-t distribution
+  # t_scale <- sqrt(
+  #   noise_df / (noise_df - 2)
+  # )
+  # 
+  # # SVG genes
+  # if (n_svg > 0) {
+  #   
+  #   eps[, seq_len(n_svg)] <- matrix(
+  #     sigma_eps *
+  #       rt(
+  #         n * n_svg,
+  #         df = noise_df
+  #       ) /
+  #       t_scale,
+  #     nrow = n,
+  #     ncol = n_svg
+  #   )
+  # }
+  # 
+  # # non-SVG genes
+  # if (G > n_svg) {
+  #   
+  #   non_svg_idx <- (n_svg + 1):G
+  #   
+  #   eps[, non_svg_idx] <- matrix(
+  #     sigma_eps_non_svg *
+  #       rt(
+  #         n * length(non_svg_idx),
+  #         df = noise_df
+  #       ) /
+  #       t_scale,
+  #     nrow = n,
+  #     ncol = length(non_svg_idx)
+  #   )
+  # }
   
   # optional truncation to prevent exp() from producing extremely large outliers
   if (!is.null(eps_cap) && is.finite(eps_cap) && eps_cap > 0) {
@@ -605,13 +648,14 @@ dir.create(rds_dir, recursive = TRUE, showWarnings = FALSE)
 # ------------------------------------------------------------
 # 1 Generate and save simulation data
 # ------------------------------------------------------------
-
+seed = 1
+alpha = 0.01
 sim <- simulate_svg_continuous_data(
   n = 10000,
   G = 1000,
   n_svg = 120,
-  sigma_eps = 0.01,
-  sigma_eps_non_svg = 0.01,
+  sigma_eps = 0.01,  # 0.01
+  sigma_eps_non_svg = 0.01, # 0.01
   zero_rate = 0,
   mu_mean = 0,
   mu_sd = 1,
@@ -626,17 +670,18 @@ print(table(sim$truth$pattern_label[sim$truth$is_svg == 1]))
 
 # ------------------------------------------------------------
 # 2 model fitting and result saving
-#
-# Set RUN_MCMC to TRUE only after fit_all_genes() has been sourced.
 # ------------------------------------------------------------
 
-seed = 1
+seed = 10
 set.seed(seed)
 cat(paste("Seed is ", seed,"\n"))
+
 t1 = Sys.time()
-fit_res <- fit_all_genes(
-  Y = sim$Y, S = sim$S, K = 5, knn = 100,
-  N = 2000, BURN = 2000,
+
+fit_res <- GeoSVG3D(
+  Y = sim$Y, S = sim$S,
+  n_basis = 5, knn = 100,
+  n_iter = 2000, burn_in = 2000,
   kappa_g = 0,
   alpha_g = 10,
   xi_g0 = 0,
@@ -644,7 +689,7 @@ fit_res <- fit_all_genes(
   xi_prop_sd = 1,
   tau2_g_update = FALSE,
   tau2_g_init = 1,
-  ncores = 10,
+  n_cores = 8,
   seed = seed
 )
 t2 = Sys.time()
@@ -652,11 +697,11 @@ runtime = t2 - t1
 print(runtime)
 
 p0g <- compute_p0g(fit_res, tol = 0)
-bfdr_res <- select_svg_bfdr(p0g, alpha = 0.05)
+bfdr_res <- select_svg_bfdr(p0g, alpha = alpha)
 res_bfdr <- run_svg_bfdr_pipeline(
   fit_res = fit_res,
   truth = sim$is_svg, #toy_dat$is_svg,
-  alpha = 0.05,
+  alpha = alpha,
   tol = 0
 )
 

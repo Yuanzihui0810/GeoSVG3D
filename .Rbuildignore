@@ -1,6 +1,9 @@
 ^simulation$
 ^real_data$
 ^scBSP$
+^SPARK$
+^SPARKX$
+^SpatialDE$
 ^\.Rproj\.user$
 ^\.RData$
 ^\.Rhistory$

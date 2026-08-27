@@ -21,16 +21,16 @@ library(Seurat)
 # Log_Exp <- Matrix(Log_Exp, sparse = TRUE)
 
 seed <- 1
-p_cutoff <- 0.05
+p_cutoff <- 0.01
 
 # RDS
 sim_rds_file <- file.path("D:/github/GeoSVG3D/simulation/data", 
-                          paste0("simulation_data_seed", seed, ".rds"))
+                          paste0("simulation2_data_seed", seed, ".rds"))
 # scBSP results are saved to:
 scbsp_dir <- "D:/github/GeoSVG3D/scBSP"
 dir.create(scbsp_dir, recursive = TRUE, showWarnings = FALSE)
 scbsp_rds_file <- file.path(scbsp_dir, 
-                            paste0("scbsp_simulation_results_seed", seed, ".rds"))
+                            paste0("scbsp_simulation2_results_seed", seed, ".rds"))
 
 # Read data from rds
 sim <- readRDS(sim_rds_file)
@@ -173,10 +173,10 @@ P_values <- as.data.frame(P_values)
 colnames(P_values)[1:2] <- c("gene", "scbsp_pvalue")
 
 P_values$scbsp_pvalue <- as.numeric(P_values$scbsp_pvalue)
-P_values$scbsp_pred <- as.integer(P_values$scbsp_pvalue < 0.05)
+P_values$scbsp_pred <- as.integer(P_values$scbsp_pvalue < 0.01)
 
 # P_values <- P_values[order(P_values$scbsp_pvalue), ]
-scbsp_bfdr_res <- which(P_values[,2]<0.05)
+scbsp_bfdr_res <- which(P_values[,2]<0.01)
 scbsp_svg_genes <- P_values$gene[P_values$scbsp_pred == 1]
 
 cat("Number of scBSP SVGs:", length(scbsp_svg_genes), "\n")

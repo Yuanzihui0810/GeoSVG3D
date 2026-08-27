@@ -11,14 +11,40 @@ seed <- 1
 geosvg_res <- readRDS(file.path(
   project_dir,
   "simulation/output",
-  paste0("Geosvg3d_simulation_results_seed", seed, ".rds")
+  paste0("Geosvg3d_simulation2_results_seed", "11",#seed,
+         ".rds")
 ))
 
 scbsp_res <- readRDS(file.path(
   project_dir,
   "scBSP",
-  paste0("scbsp_simulation_results_seed", seed, ".rds")
+  paste0("scbsp_simulation2_results_seed", seed, ".rds")
 ))
+
+spark_res <- readRDS(file.path(
+  project_dir,
+  "SPARK/output/sim1",
+  paste0(
+    "spark_simulation_3D_results_seed",
+    seed,
+    ".rds"
+  )
+))
+
+sparkx_res <- readRDS(file.path(
+  project_dir,
+  "SPARKX/output",
+  "sparkx_simulation2_results.rds"
+))
+
+spatialde_res <- read.csv(file.path(
+  project_dir,
+  "SpatialDE/output",
+  "spatialde_simulation2_results.csv"
+))
+
+pred_spatialde <- spatialde_res$pred
+score_spatialde <- 1 - spatialde_res$qval
 
 sim <- geosvg_res$sim
 
@@ -28,6 +54,12 @@ pred_scbsp <- scbsp_res$pred
 
 score_geosvg <- 1 - geosvg_res$p0g
 score_scbsp <- 1 - scbsp_res$pvalues
+
+pred_spark <- spark_res$pred
+pred_sparkx <- sparkx_res$pred
+
+score_spark <- 1 - spark_res$adjusted_pvalues #1 - spark_res$pvalues
+score_sparkx <- 1 - sparkx_res$adjusted_pvalues #1 - sparkx_res$combined_pvalues
 
 fig_dir <- file.path(project_dir, "simulation/figures")
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
@@ -230,7 +262,7 @@ plot_simulated_Y_patterns_3d_each_plot3D <- function(
 plot_simulated_Y_patterns_3d_each_plot3D(
   sim,
   genes = c(1, 31, 61, 91, 101, 111),
-  output_dir = file.path(fig_dir, "plot3D"),
+  output_dir = file.path(fig_dir, "plot3D2"),
   file_type = "pdf",
   point_cex = 0.5,
   theta = 305,
@@ -241,9 +273,9 @@ plot_simulated_Y_patterns_3d_each_plot3D(
 plot_simulated_Y_patterns_3d_each_plot3D(
   sim,
   genes = c(1, 31, 61, 91, 101, 111),
-  output_dir = file.path(fig_dir, "plot3D"),
+  output_dir = file.path(fig_dir, "plot3D2"),
   file_type = "png",
-  point_cex = 0.5,
+  point_cex = 0.4,
   theta = 305,
   phi = 40,
   color_transform = "log1p"
@@ -272,12 +304,14 @@ get_metrics <- function(method, pred) {
 
 performance_table <- rbind(
   get_metrics("GeoSVG-3D", pred_geosvg),
-  get_metrics("scBSP", pred_scbsp)
+  get_metrics("scBSP", pred_scbsp),
+  get_metrics("SPARK", pred_spark),
+  get_metrics("SPARK-X", pred_sparkx)
 )
 
 write.csv(
   performance_table,
-  file.path(fig_dir, "sim_performance.csv"),
+  file.path(fig_dir, "sim2_performance.csv"),
   row.names = FALSE
 )
 
@@ -304,6 +338,30 @@ roc_scbsp <- roc(
   quiet = TRUE
 )
 
+roc_spark <- roc(
+  response = truth,
+  predictor = score_spark,
+  levels = c(0, 1),
+  direction = "<",
+  quiet = TRUE
+)
+
+roc_sparkx <- roc(
+  response = truth,
+  predictor = score_sparkx,
+  levels = c(0, 1),
+  direction = "<",
+  quiet = TRUE
+)
+
+roc_spatialde <- roc(
+  response = truth,
+  predictor = score_spatialde,
+  levels = c(0, 1),
+  direction = "<",
+  quiet = TRUE
+)
+
 roc_geosvg_df <- data.frame(
   FPR = 1 - roc_geosvg$specificities,
   TPR = roc_geosvg$sensitivities
@@ -320,47 +378,173 @@ roc_scbsp_df <- roc_scbsp_df[
   order(roc_scbsp_df$FPR, roc_scbsp_df$TPR),
 ]
 
+roc_spark_df <- data.frame(
+  FPR = 1 - roc_spark$specificities,
+  TPR = roc_spark$sensitivities
+)
+
+roc_spark_df <- roc_spark_df[
+  order(
+    roc_spark_df$FPR,
+    roc_spark_df$TPR
+  ),
+]
+
+
+roc_sparkx_df <- data.frame(
+  FPR = 1 - roc_sparkx$specificities,
+  TPR = roc_sparkx$sensitivities
+)
+
+roc_sparkx_df <- roc_sparkx_df[
+  order(
+    roc_sparkx_df$FPR,
+    roc_sparkx_df$TPR
+  ),
+]
+
+roc_spatialde_df <- data.frame(
+  FPR = 1 - roc_spatialde$specificities,
+  TPR = roc_spatialde$sensitivities
+)
+
+roc_spatialde_df <- roc_spatialde_df[
+  order(roc_spatialde_df$FPR,
+        roc_spatialde_df$TPR),
+]
+
+auc_spatialde <- as.numeric(auc(roc_spatialde))
+
 auc_geosvg <- as.numeric(auc(roc_geosvg))
 auc_scbsp <- as.numeric(auc(roc_scbsp))
 
+auc_spark <- as.numeric(auc(roc_spark))
+auc_sparkx <- as.numeric(auc(roc_sparkx))
+
+# draw_roc_curve <- function() {
+#   par(mar = c(5, 5, 3, 2))
+#   
+#   plot(
+#     roc_geosvg_df$FPR,
+#     roc_geosvg_df$TPR,
+#     type = "s",
+#     xlim = c(0, 0.5),
+#     ylim = c(0, 1),
+#     lwd = 2.5,
+#     col = "red",
+#     xlab = "False positive rate",
+#     ylab = "True positive rate",
+#     main = "ROC curve"
+#   )
+#   
+#   lines(
+#     roc_scbsp_df$FPR,
+#     roc_scbsp_df$TPR,
+#     type = "s",
+#     lwd = 2.5,
+#     col = "blue"
+#   )
+#   
+#   lines(
+#     roc_spark_df$FPR,
+#     roc_spark_df$TPR,
+#     type = "s",
+#     lwd = 2.5,
+#     col = "darkgreen"
+#   )
+#   
+#   lines(
+#     roc_sparkx_df$FPR,
+#     roc_sparkx_df$TPR,
+#     type = "s",
+#     lwd = 2.5,
+#     col = "purple"
+#   )
+#   
+#   legend(
+#     "bottomright",
+#     legend = c(
+#       paste0("GeoSVG-3D, AUC = ", sprintf("%.4f", auc_geosvg)),
+#       paste0("scBSP, AUC = ", sprintf("%.4f", auc_scbsp)),
+#       paste0("SPARK, AUC = ", sprintf("%.4f", auc_spark)),
+#       paste0("SPARK-X, AUC = ", sprintf("%.4f", auc_sparkx))
+#     ),
+#     col = c("red", "blue", 
+#             "darkgreen", "purple"),
+#     lwd = 2.5,
+#     bty = "n"
+#   )
+# }
 draw_roc_curve <- function() {
   par(mar = c(5, 5, 3, 2))
   
   plot(
-    roc_geosvg_df$FPR,
-    roc_geosvg_df$TPR,
-    type = "s",
-    xlim = c(0, 0.5),
-    ylim = c(0, 1),
-    lwd = 2.5,
-    col = "red",
-    xlab = "False positive rate",
-    ylab = "True positive rate",
-    main = "ROC curve"
-  )
-  
-  lines(
     roc_scbsp_df$FPR,
     roc_scbsp_df$TPR,
     type = "s",
+    xlim = c(0, 0.25),
+    ylim = c(0, 1),
     lwd = 2.5,
-    col = "blue"
+    col = "blue",
+    xlab = "False positive rate",
+    ylab = "True positive rate",
+    main = "(a) ROC curve"
+  )
+  
+  lines(
+    roc_geosvg_df$FPR,
+    roc_geosvg_df$TPR,
+    type = "s",
+    lwd = 2.5,
+    col = "red"
+  )
+  
+  lines(
+    roc_spark_df$FPR,
+    roc_spark_df$TPR,
+    type = "s",
+    lwd = 2.5,
+    col = "darkgreen",
+    lty = 2
+  )
+  
+  lines(
+    roc_sparkx_df$FPR,
+    roc_sparkx_df$TPR,
+    type = "s",
+    lwd = 2.5,
+    col = "purple",
+    lty = 3
+  )
+  
+  lines(
+    roc_spatialde_df$FPR,
+    roc_spatialde_df$TPR,
+    type = "s",
+    lwd = 2.5,
+    col = "orange",
+    lty = 4
   )
   
   legend(
     "bottomright",
     legend = c(
       paste0("GeoSVG-3D, AUC = ", sprintf("%.4f", auc_geosvg)),
-      paste0("scBSP, AUC = ", sprintf("%.4f", auc_scbsp))
+      paste0("scBSP, AUC = ", sprintf("%.4f", auc_scbsp)),
+      paste0("SPARK, AUC = ", sprintf("%.4f", auc_spark)),
+      paste0("SPARK-X, AUC = ", sprintf("%.4f", auc_sparkx)),
+      paste0("SpatialDE, AUC = ", sprintf("%.4f", auc_spatialde))
     ),
-    col = c("red", "blue"),
+    col = c("red", "blue", "darkgreen", "purple", "orange"),
     lwd = 2.5,
-    bty = "n"
+    lty = c(1, 1, 2, 3),
+    bty = "n",
+    cex = 0.9
   )
 }
 
 pdf(
-  file.path(fig_dir, "sim_roc_auc.pdf"),
+  file.path(fig_dir, "sim2_roc_auc.pdf"),
   width = 5.5,
   height = 5.5
 )
@@ -368,7 +552,7 @@ draw_roc_curve()
 dev.off()
 
 png(
-  filename = file.path(fig_dir, "sim_roc_auc.png"),
+  filename = file.path(fig_dir, "sim2_roc_auc.png"),
   width = 5.5,
   height = 5.5,
   units = "in",
@@ -378,13 +562,14 @@ draw_roc_curve()
 dev.off()
 
 auc_table <- data.frame(
-  method = c("GeoSVG-3D", "scBSP"),
-  AUC = c(auc_geosvg, auc_scbsp)
+  method = c("GeoSVG-3D", "scBSP", "SPARK", "SPARK-X", "SpatialDE"),
+  AUC = c(auc_geosvg, auc_scbsp, auc_spark, auc_sparkx, auc_spatialde)
 )
+
 
 write.csv(
   auc_table,
-  file.path(fig_dir, "sim_auc.csv"),
+  file.path(fig_dir, "sim2_auc.csv"),
   row.names = FALSE
 )
 

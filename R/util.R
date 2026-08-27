@@ -89,8 +89,8 @@ scale_spatial_coords_01 <- function(S) {
 #' @param y_g Numeric expression vector for one gene.
 #' @param B Numeric graph-basis matrix.
 #' @param lambda Numeric vector of graph Laplacian eigenvalues.
-#' @param N Number of retained MCMC iterations after burn-in.
-#' @param BURN Number of burn-in iterations.
+#' @param n_iter Number of retained MCMC iterations after burn-in.
+#' @param burn_in Number of burn-in iterations.
 #' @param thin Thinning interval.
 #' @param mh_per_k Number of Metropolis-Hastings updates per basis coefficient
 #'   in each MCMC iteration.
@@ -122,7 +122,7 @@ scale_spatial_coords_01 <- function(S) {
 #' @return A list of posterior samples returned by the C++ MCMC sampler.
 #' @noRd
 fit_one_gene <- function(
-    y_g, B, lambda, N = 2000, BURN = 2000, thin = 1, mh_per_k = 1,
+    y_g, B, lambda, n_iter = 2000, burn_in = 2000, thin = 1, mh_per_k = 1,
     
     kappa_g = 0, alpha_g = 10, xi_g0 = 0,
     
@@ -153,7 +153,7 @@ fit_one_gene <- function(
   lam2 <- lam[2]
   lam3 <- lam[3]
   
-  K <- ncol(B)
+  n_basis <- ncol(B)
   
   if (is.null(mu_g_init)) {
     mu_g_init <- mean(y_g)
@@ -164,11 +164,11 @@ fit_one_gene <- function(
   }
   
   if (is.null(xi_g_init)) {
-    xi_g_init <- numeric(K)
+    xi_g_init <- numeric(n_basis)
   }
   
   if (is.null(omega_g_init)) {
-    omega_g_init <- numeric(K)
+    omega_g_init <- numeric(n_basis)
   }
   
   if (prior %in% c("BL", "HS")) {
@@ -177,7 +177,7 @@ fit_one_gene <- function(
   
   spde_neuronized_basic_one_gene_cpp(
     y_g = y_g, B = B, lambda = lambda,
-    N = N, BURN = BURN, thin = thin, mh_per_k = mh_per_k,
+    N = n_iter, BURN = burn_in, thin = thin, mh_per_k = mh_per_k,
     
     kappa_g = kappa_g, alpha_g = alpha_g, xi_g0 = xi_g0,
     
@@ -203,15 +203,15 @@ fit_one_gene <- function(
 #'   rows and genes in columns.
 #' @param S A numeric matrix with observations in rows and three spatial
 #'   coordinates in columns.
-#' @param K Number of graph Laplacian basis functions.
+#' @param n_basis Number of graph Laplacian basis functions.
 #' @param knn Number of nearest neighbors used to construct the spatial graph.
 #' @param h Optional Gaussian-kernel bandwidth passed to `build_W_knn()`.
 #' @param normalized_laplacian Logical; whether to use the normalized graph
 #'   Laplacian.
 #' @param binary Logical; whether to use binary instead of Gaussian-kernel
 #'   graph weights.
-#' @param N Number of retained MCMC iterations after burn-in.
-#' @param BURN Number of burn-in iterations.
+#' @param n_iter Number of retained MCMC iterations after burn-in.
+#' @param burn_in Number of burn-in iterations.
 #' @param thin Thinning interval.
 #' @param mh_per_k Number of Metropolis-Hastings updates per basis coefficient
 #'   in each MCMC iteration.
@@ -237,7 +237,7 @@ fit_one_gene <- function(
 #' @param tau2_g_update Logical; whether to update `tau2_g`.
 #' @param tau2_g_init Scalar or gene-specific vector of initial `tau2_g`
 #'   values.
-#' @param ncores Number of parallel workers.
+#' @param n_cores Number of parallel workers.
 #' @param seed Integer seed used to initialize gene-specific random-number
 #'   streams in parallel computation.
 #'
@@ -246,10 +246,10 @@ fit_one_gene <- function(
 #'   fits, and prior specification.
 #'
 #' @export
-fit_all_genes <- function(
-    Y, S, K = 5, knn = 100, h = NULL, 
+GeoSVG3D <- function(
+    Y, S, n_basis = 5, knn = 100, h = NULL, 
     normalized_laplacian = FALSE, binary = FALSE,
-    N = 2000, BURN = 2000, thin = 1, mh_per_k = 1,
+    n_iter = 2000, burn_in = 2000, thin = 1, mh_per_k = 1,
     
     kappa_g = 0,
     alpha_g = 10, xi_g0 = 0,
@@ -257,7 +257,7 @@ fit_all_genes <- function(
     prior = c("BL", "HS", "SpSL-L", "SpSL-C", "SpSL-G", "custom"),
     act_type = NULL, SpSL_type = NULL, lam = c(0,0,0),
     xi_prop_sd = 0.15, tau2_g_update = FALSE, tau2_g_init = 1,
-    ncores = 1L, seed = 1
+    n_cores = 1L, seed = 1
 ) {
   stopifnot(nrow(Y) == nrow(S))
   S <- scale_spatial_coords_01(S)
@@ -267,7 +267,7 @@ fit_all_genes <- function(
   L <- compute_laplacian(W, normalized = normalized_laplacian)
   d <- Matrix::rowSums(W)
   # cat(paste("Check graph degree...", sum(d == 0), "node with no edge\n"))
-  eig <- compute_eigen(L, K = K, tol = 1e-10)
+  eig <- compute_eigen(L, K = n_basis, tol = 1e-10)
   # cat("Finish building graph\n")
   
   B_basis <- eig$U
@@ -289,7 +289,7 @@ fit_all_genes <- function(
   fit_one <- function(g) {
     fit_one_gene(
       y_g = Y[, g], B = B_basis, lambda = lambda,
-      N = N, BURN = BURN, thin = thin, mh_per_k = mh_per_k,
+      n_iter = n_iter, burn_in = burn_in, thin = thin, mh_per_k = mh_per_k,
       kappa_g = kappa_g_vec[g], alpha_g = alpha_g_vec[g], xi_g0 = xi_g0_vec[g],
       nu_g0 = nu_g0, eta_g0_sq = eta_g0_sq, m_g0 = m_g0, gamma_g0 = gamma_g0,
       a_g0 = a_g0, b_g0 = b_g0,
@@ -301,7 +301,7 @@ fit_all_genes <- function(
   
   cat("Start analysing...\n")
   
-  if (ncores <= 1L) {
+  if (n_cores <= 1L) {
     # fits <- lapply(seq_len(G), fit_one)
     fits <- vector("list", G)
     pb <- utils::txtProgressBar(min = 0, max = G, style = 3)
@@ -313,7 +313,7 @@ fit_all_genes <- function(
     }
   } else {
     # t1 = Sys.time()
-    cl <- parallel::makeCluster(ncores)
+    cl <- parallel::makeCluster(n_cores)
     # parallel::clusterSetRNGStream(cl, iseed = seed)
     on.exit(parallel::stopCluster(cl), add = TRUE)
     # t2 = Sys.time()
@@ -321,9 +321,9 @@ fit_all_genes <- function(
     
     # ***** Later change to the following code *****
     pkg <- "GeoSVG3D"  # Package name
-
+    
     parallel::clusterExport(cl, "pkg", envir = environment())
-
+    
     parallel::clusterEvalQ(cl, {
       library(pkg, character.only = TRUE)
       NULL
@@ -334,7 +334,7 @@ fit_all_genes <- function(
       varlist = c(
         #"GeoSVG3D",#"pkg_name", #"fit_one_gene", "prior_to_type",
         "Y", "B_basis", "lambda",
-        "N", "BURN", "thin", "mh_per_k",
+        "n_iter", "burn_in", "thin", "mh_per_k",
         "kappa_g_vec", "alpha_g_vec", "xi_g0_vec",
         "nu_g0", "eta_g0_sq", "m_g0", "gamma_g0", "a_g0", "b_g0",
         "prior", "act_type", "SpSL_type", "lam",
@@ -360,7 +360,7 @@ fit_all_genes <- function(
           y_g = Y[, g],
           B = B_basis,
           lambda = lambda,
-          N = N, BURN = BURN, thin = thin, mh_per_k = mh_per_k,
+          n_iter = n_iter, burn_in = burn_in, thin = thin, mh_per_k = mh_per_k,
           kappa_g = kappa_g_vec[g],
           alpha_g = alpha_g_vec[g],
           xi_g0 = xi_g0_vec[g],
@@ -381,7 +381,7 @@ fit_all_genes <- function(
     #     y_g = Y[, g],
     #     B = B_basis,
     #     lambda = lambda,
-    #     N = N, BURN = BURN, thin = thin, mh_per_k = mh_per_k,
+    #     n_iter = n_iter, burn_in = burn_in, thin = thin, mh_per_k = mh_per_k,
     #     kappa_g = kappa_g_vec[g],
     #     alpha_g = alpha_g_vec[g],
     #     xi_g0 = xi_g0_vec[g],
@@ -413,7 +413,7 @@ fit_all_genes <- function(
 #' which all spatial-basis coefficients are zero, or within a specified
 #' tolerance of zero.
 #'
-#' @param fit_res An object returned by `fit_all_genes()`.
+#' @param fit_res An object returned by `GeoSVG3D()`.
 #' @param tol Nonnegative numerical tolerance used to define a zero
 #'   coefficient.
 #'
@@ -543,7 +543,7 @@ evaluate_svg_detection <- function(truth, pred) {
 #' Computes posterior null probabilities, performs Bayesian FDR selection,
 #' and evaluates the selected genes against known truth labels.
 #'
-#' @param fit_res An object returned by `fit_all_genes()`.
+#' @param fit_res An object returned by `GeoSVG3D()`.
 #' @param truth Binary vector of true SVG labels used for performance
 #'   evaluation.
 #' @param alpha Target Bayesian false discovery rate.

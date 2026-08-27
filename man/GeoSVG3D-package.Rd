@@ -2,7 +2,6 @@
 % Please edit documentation in R/util.R
 \docType{package}
 \name{GeoSVG3D-package}
-\alias{GeoSVG3D}
 \alias{GeoSVG3D-package}
 \title{GeoSVG3D package}
 \description{
@@ -18,6 +17,12 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Zihui Yuan \email{yuanzihui0810@gmail.com}
+
+Other contributors:
+\itemize{
+  \item Yinqiao Yan [funder]
+  \item Xiangyu Luo [funder]
+}
 
 }
 \keyword{internal}

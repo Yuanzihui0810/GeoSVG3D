@@ -1,0 +1,7 @@
+"method_1","method_2","n_method_1","n_method_2","n_overlap","n_method_1_only","n_method_2_only"
+"GeoSVG-3D","scBSP",322,82,32,290,50
+"GeoSVG-3D","SPARK",322,738,246,76,492
+"GeoSVG-3D","SPARK-X",322,502,171,151,331
+"scBSP","SPARK",82,738,81,1,657
+"scBSP","SPARK-X",82,502,82,0,420
+"SPARK","SPARK-X",738,502,467,271,35

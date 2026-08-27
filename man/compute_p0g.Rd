@@ -7,7 +7,7 @@
 compute_p0g(fit_res, tol = 0)
 }
 \arguments{
-\item{fit_res}{An object returned by \code{fit_all_genes()}.}
+\item{fit_res}{An object returned by \code{GeoSVG3D()}.}
 
 \item{tol}{Nonnegative numerical tolerance used to define a zero
 coefficient.}

@@ -2,6 +2,10 @@ library(data.table)
 library(ggplot2)
 library(scatterplot3d)
 library(plot3D)
+if (!requireNamespace("ggVennDiagram", quietly = TRUE)) {
+  install.packages("ggVennDiagram")
+}
+library(ggVennDiagram)
 # ============================================================
 # 0. Paths
 # ============================================================
@@ -20,15 +24,23 @@ geosvg_rds <- file.path(real_data_dir, "output",
 scbsp_rds <- file.path(project_dir, "scBSP/Peptidergic_neurons", 
                        paste0("scBSP_results_", prefix, ".rds"))
 
+spark_rds <- file.path(project_dir, "SPARK", "output", "real",
+                       paste0(prefix, "_SPARK_3D_results.rds"))
+
+sparkx_rds <- file.path(project_dir, "SPARKX", "output",
+                        paste0(prefix, "_SPARKX_3D_results.rds"))
+
 fig_dir <- file.path(real_data_dir, "figure")
 tab_dir <- file.path(real_data_dir, "table")
 expr_3d_dir <- file.path(fig_dir, "representative_svg_3d_expression")
 expr_2d_dir <- file.path(fig_dir, "representative_svg_xy_expression")
+venn_dir <- file.path(fig_dir, "method_overlap")
 
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(tab_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(expr_3d_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(expr_2d_dir, recursive = TRUE, showWarnings = FALSE)
+dir.create(venn_dir, recursive = TRUE, showWarnings = FALSE)
 
 main_blue <- "#1F4E79"
 main_red  <- "#B22222"
@@ -132,7 +144,7 @@ geosvg_tab <- geosvg_tab[order(geosvg_tab$p0g), ]
 cat("Number of GeoSVG-3D SVGs:", sum(geosvg_tab$geosvg_pred == 1), "\n")
 
 # ============================================================
-# 3. Load scBSP result
+# 3.0 Load scBSP result
 # ============================================================
 
 if (!file.exists(scbsp_rds)) {
@@ -147,11 +159,58 @@ colnames(P_values)[1:2] <- c("gene", "scbsp_pvalue")
 scbsp_tab <- P_values[, c("gene", "scbsp_pvalue")]
 scbsp_tab$gene <- as.character(scbsp_tab$gene)
 scbsp_tab$scbsp_pvalue <- as.numeric(scbsp_tab$scbsp_pvalue)
-scbsp_tab$scbsp_pred <- as.integer(scbsp_tab$scbsp_pvalue < 0.05)
+scbsp_tab$scbsp_pred <- as.integer(scbsp_tab$scbsp_pvalue < 0.01)
 
 scbsp_tab <- scbsp_tab[order(scbsp_tab$scbsp_pvalue), ]
 
 cat("Number of scBSP SVGs:", sum(scbsp_tab$scbsp_pred == 1), "\n")
+
+# ============================================================
+# 3.1 Load SPARK-X result
+# ============================================================
+
+if (!file.exists(sparkx_rds)) {
+  stop("SPARK-X RDS file not found: ", sparkx_rds)
+}
+
+sparkx_obj <- readRDS(sparkx_rds)
+idx = match(colnames(Y), sparkx_obj$result[, "gene"])
+
+sparkx_tab <- data.frame(
+  gene = colnames(Y),
+  sparkx_pvalue = as.numeric(sparkx_obj$result[idx,
+                                               'adjustedPval']),
+  sparkx_pred = as.integer(sparkx_obj$result[idx,
+                                             'pred']),
+  stringsAsFactors = FALSE
+)
+
+sparkx_tab <- sparkx_tab[order(sparkx_tab$sparkx_pvalue), ]
+
+cat("Number of SPARK-X SVGs:", sum(sparkx_tab$sparkx_pred == 1), "\n")
+
+# ============================================================
+# 3.2 Load SPARK result
+# ============================================================
+
+if (!file.exists(spark_rds)) {
+  stop("SPARK RDS file not found: ", spark_rds)
+}
+
+spark_obj <- readRDS(spark_rds)
+idx = match(colnames(Y), spark_obj$result[, "gene"])
+spark_tab <- data.frame(
+  gene = colnames(Y),
+  spark_pvalue = as.numeric(spark_obj$result[idx,
+                                             'adjusted_pvalue']),
+  spark_pred = as.integer(spark_obj$result[idx,
+                                           'pred']),
+  stringsAsFactors = FALSE
+)
+
+spark_tab <- spark_tab[order(spark_tab$spark_pvalue), ]
+
+cat("Number of SPARK SVGs:", sum(spark_tab$spark_pred == 1), "\n")
 
 # ============================================================
 # 4. Merge GeoSVG-3D and scBSP by gene name
@@ -177,6 +236,23 @@ merged_res <- merge(
   sort = FALSE
 )
 
+
+merged_res <- merge(
+  merged_res,
+  spark_tab,
+  by = "gene",
+  all.x = TRUE,
+  sort = FALSE
+)
+
+merged_res <- merge(
+  merged_res,
+  sparkx_tab,
+  by = "gene",
+  all.x = TRUE,
+  sort = FALSE
+)
+
 # Then merge raw zero proportion
 merged_res <- merge(
   merged_res,
@@ -186,8 +262,23 @@ merged_res <- merge(
   sort = FALSE
 )
 
-# Genes removed by SpFilter are treated as not selected by scBSP.
-merged_res$scbsp_pred[is.na(merged_res$scbsp_pred)] <- 0L
+# # Genes removed by SpFilter are treated as not selected by scBSP.
+# merged_res$scbsp_pred[is.na(merged_res$scbsp_pred)] <- 0L
+# 
+# Genes filtered out or absent from one method are treated
+# as not selected by that method.
+prediction_columns <- c(
+  "geosvg_pred",
+  "scbsp_pred",
+  "spark_pred",
+  "sparkx_pred"
+)
+
+for (column_name in prediction_columns) {
+  merged_res[[column_name]][
+    is.na(merged_res[[column_name]])
+  ] <- 0L
+}
 
 merged_res$category <- with(
   merged_res,
@@ -200,7 +291,7 @@ merged_res <- merged_res[order(merged_res$p0g), ]
 
 write.csv(
   merged_res,
-  file.path(tab_dir, paste0(prefix, "_GeoSVG3D_scBSP_merged_results.csv")),
+  file.path(tab_dir, paste0(prefix, "_four_method_merged_results.csv")),
   row.names = FALSE
 )
 
@@ -241,6 +332,137 @@ write.csv(
 print(method_summary)
 print(overlap_summary)
 
+# ============================================================
+# 5.1 Four-method summary and pairwise overlaps
+# ============================================================
+
+svg_sets <- list(
+  "GeoSVG-3D" = unique(merged_res$gene[merged_res$geosvg_pred == 1]),
+  "scBSP"     = unique(merged_res$gene[merged_res$scbsp_pred == 1]),
+  "SPARK"     = unique(merged_res$gene[merged_res$spark_pred == 1]),
+  "SPARK-X"   = unique(merged_res$gene[merged_res$sparkx_pred == 1])
+)
+
+svg_sets <- lapply(svg_sets, unique)
+
+# Number of SVGs identified by each method
+method_summary <- data.frame(
+  method = names(svg_sets),
+  n_detected_svg = lengths(svg_sets)
+)
+
+# Pairwise comparison of six groups
+method_pairs <- combn(names(svg_sets), 2, simplify = FALSE)
+
+pairwise_summary <- rbindlist(
+  lapply(method_pairs, function(x) {
+    
+    genes1 <- svg_sets[[x[1]]]
+    genes2 <- svg_sets[[x[2]]]
+    
+    data.table(
+      method_1 = x[1],
+      method_2 = x[2],
+      n_method_1 = length(genes1),
+      n_method_2 = length(genes2),
+      n_overlap = length(intersect(genes1, genes2)),
+      n_method_1_only = length(setdiff(genes1, genes2)),
+      n_method_2_only = length(setdiff(genes2, genes1))
+    )
+  })
+)
+
+# Save each group's specific overlapping and unique genes
+pairwise_genes <- rbindlist(
+  lapply(method_pairs, function(x) {
+    
+    genes1 <- svg_sets[[x[1]]]
+    genes2 <- svg_sets[[x[2]]]
+    
+    make_rows <- function(category, genes) {
+      if (length(genes) == 0) return(NULL)
+      
+      data.table(
+        method_1 = x[1],
+        method_2 = x[2],
+        category = category,
+        gene = sort(genes)
+      )
+    }
+    
+    rbindlist(
+      list(
+        make_rows("Overlap", intersect(genes1, genes2)),
+        make_rows(paste0(x[1], " only"), setdiff(genes1, genes2)),
+        make_rows(paste0(x[2], " only"), setdiff(genes2, genes1))
+      )
+    )
+  })
+)
+
+write.csv(
+  method_summary,
+  file.path(tab_dir, paste0(prefix, "_four_method_svg_summary.csv")),
+  row.names = FALSE
+)
+
+write.csv(
+  pairwise_summary,
+  file.path(tab_dir, paste0(prefix, "_pairwise_overlap_summary.csv")),
+  row.names = FALSE
+)
+
+write.csv(
+  pairwise_genes,
+  file.path(tab_dir, paste0(prefix, "_pairwise_overlap_genes.csv")),
+  row.names = FALSE
+)
+
+print(method_summary)
+print(pairwise_summary)
+
+venn_list <- list(
+  `GeoSVG-3D` = svg_sets[["GeoSVG-3D"]],
+  `scBSP`     = svg_sets[["scBSP"]],
+  `SPARK`     = svg_sets[["SPARK"]],
+  `SPARK-X`   = svg_sets[["SPARK-X"]]
+)
+
+p <- ggVennDiagram(
+  venn_list,
+  label = "count",     
+  label_alpha = 0      
+) +
+  scale_fill_gradient(
+    low = "white",
+    high = "#3C5488"  
+  ) +
+  scale_x_continuous(expand = expansion(mult = 0.05)) +
+  scale_y_continuous(expand = expansion(mult = 0.05)) +
+  coord_cartesian(clip = "off") +
+  theme_void() +
+  theme(
+    legend.position = "none",
+    plot.margin = margin(5, 10, 5, 10),
+    text = element_text(size = 16)
+  )
+ggsave(
+  filename = file.path(venn_dir, "venn.pdf"),
+  plot = p,
+  width = 10,
+  height = 7,
+  units = "in"
+)
+
+ggsave(
+  filename = file.path(venn_dir, "venn.png"),
+  plot = p,
+  width = 10,
+  height = 7,
+  units = "in",
+  dpi = 300,
+  bg = "white"
+)
 # ============================================================
 # 6. Plot p0g distribution
 # ============================================================
