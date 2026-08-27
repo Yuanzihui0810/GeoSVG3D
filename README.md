@@ -60,10 +60,8 @@ set.seed(123)
 n <- 200
 G <- 20
 
-S <- matrix(runif(n * 3), nrow = n, ncol = 3, dimnames = list(NULL, c("x", "y", "z"))
-)
-
 Y <- matrix(rnorm(n * G), nrow = n, ncol = G)
+S <- matrix(runif(n * 3), nrow = n, ncol = 3, dimnames = list(NULL, c("x", "y", "z")))
 
 fit <- GeoSVG3D(
   Y = Y, S = S, n_basis = 5, knn = 100, n_iter = 2000, burn_in = 2000, thin = 1,
