@@ -218,13 +218,7 @@ spark <- spark.vc(
 # 7. Test spatial patterns
 # ============================================================
 
-# spark <- spark.test.new(
-#   spark,
-#   check_positive = TRUE,
-#   verbose = FALSE
-# )
-
-spark <- spark.test(
+spark <- spark.test.new(
   spark,
   check_positive = TRUE,
   verbose = FALSE

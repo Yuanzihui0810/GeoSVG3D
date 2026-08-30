@@ -520,46 +520,6 @@ simulate_svg_continuous_data <- function(
       ncol = length(non_svg_idx)
     )
   }
-
-  # noise_df = 4
-  # eps <- matrix(0, nrow = n, ncol = G)
-  # 
-  # # Standardization factor for Student-t distribution
-  # t_scale <- sqrt(
-  #   noise_df / (noise_df - 2)
-  # )
-  # 
-  # # SVG genes
-  # if (n_svg > 0) {
-  #   
-  #   eps[, seq_len(n_svg)] <- matrix(
-  #     sigma_eps *
-  #       rt(
-  #         n * n_svg,
-  #         df = noise_df
-  #       ) /
-  #       t_scale,
-  #     nrow = n,
-  #     ncol = n_svg
-  #   )
-  # }
-  # 
-  # # non-SVG genes
-  # if (G > n_svg) {
-  #   
-  #   non_svg_idx <- (n_svg + 1):G
-  #   
-  #   eps[, non_svg_idx] <- matrix(
-  #     sigma_eps_non_svg *
-  #       rt(
-  #         n * length(non_svg_idx),
-  #         df = noise_df
-  #       ) /
-  #       t_scale,
-  #     nrow = n,
-  #     ncol = length(non_svg_idx)
-  #   )
-  # }
   
   # optional truncation to prevent exp() from producing extremely large outliers
   if (!is.null(eps_cap) && is.finite(eps_cap) && eps_cap > 0) {

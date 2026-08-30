@@ -44,7 +44,7 @@ The other main arguments of the fitting function `GeoSVG3D()` are described belo
 -   `thin`: the thinning value for retained MCMC samples.
 -   `kappa_g`: the spectral range parameter used in SPDE-inspired scaling.
 -   `alpha_g`: the spectral smoothness parameter used in SPDE-inspired scaling.
--   `prior`: the neuronized prior specification, including Bayesian Lasso-type (`"BL"`), horseshoe-type (`"HS"`), and spike-and-slab-type priors (`"SpSL-L"`, `"SpSL-C"`, and `"SpSL-G"`).
+-   `prior`: the neuronized prior specification, including Bayesian Lasso-type (`"BL"`), horseshoe-type (`"HS"`), and spike-and-slab priors with Laplace-like (`"SpSL-L"`), Cauchy (`"SpSL-C"`), and Gaussian (`"SpSL-G"`) slabs.
 -   `n_cores`: the number of CPU cores used for gene-wise parallel computation.
 -   `seed`: the random seed used for reproducible computation.
 
@@ -89,3 +89,7 @@ fit <- GeoSVG3D(
 ## Datasets
 
 The Deep-STARMAP dataset used in the manuscript is available at <https://zenodo.org/records/16783355>.
+
+## Remarks
+
+If you have any questions regarding this package, please contact Zihui Yuan at [yuanzihui0810@gmail.com](mailto:yuanzihui0810@gmail.com).
