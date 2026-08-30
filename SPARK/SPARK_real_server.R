@@ -232,12 +232,6 @@ cat("identical genes:",
 # 7. Test spatial patterns
 # ============================================================
 
-# spark <- spark.test.new(
-#   spark,
-#   check_positive = TRUE,
-#   verbose = FALSE
-# )
-
 spark <- spark.test.new(
   spark,
   check_positive = TRUE,
@@ -251,7 +245,7 @@ runtime_spark <- t2 - t1
 print(runtime_spark)
 
 # ============================================================
-# 7. Extract results
+# 8. Extract results
 # ============================================================
 
 spark_res <- data.frame(
@@ -283,7 +277,7 @@ cat(
 
 
 # ============================================================
-# 8. Save results
+# 9. Save results
 # ============================================================
 
 write.csv(

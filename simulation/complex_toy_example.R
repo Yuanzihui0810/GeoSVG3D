@@ -76,9 +76,6 @@ simulate_svg_continuous_data2 <- function(
   x <- u
   y <- v
   z <- w
-  # x = rescale01(x_obs)
-  # y = rescale01(y_obs)
-  # z = rescale01(z_obs)
   
   xc <- x - 0.5
   yc <- y - 0.5
@@ -163,7 +160,6 @@ simulate_svg_continuous_data2 <- function(
     dy2 <- dy2 / norm2
     dz2 <- dz2 / norm2
     
-    # f2 <- dx2 * xc + dy2 * yc + dz2 * zc
     f2 <- dx2 * x + dy2 * y + dz2 * z
     f2 <- f2 + 0.15 * cos(2 * pi * z_warp2)
     add_f(amp_gradient * f2, "gradient")
@@ -540,26 +536,6 @@ simulate_svg_continuous_data2 <- function(
   eta_true <- eta_true + F_true
   colnames(eta_true) <- gene_names
   
-  # eps <- matrix(0, nrow = n, ncol = G)
-  # 
-  # if (n_svg > 0) {
-  #   eps[, seq_len(n_svg)] <- matrix(
-  #     rnorm(n * n_svg, mean = 0, sd = sigma_eps),
-  #     nrow = n,
-  #     ncol = n_svg
-  #   )
-  # }
-  # 
-  # if (G > n_svg) {
-  #   non_svg_idx <- (n_svg + 1):G
-  #   
-  #   eps[, non_svg_idx] <- matrix(
-  #     rnorm(n * length(non_svg_idx), mean = 0, sd = sigma_eps_non_svg),
-  #     nrow = n,
-  #     ncol = length(non_svg_idx)
-  #   )
-  # }
-  
   noise_df = 4
   eps <- matrix(0, nrow = n, ncol = G)
   
@@ -710,43 +686,40 @@ print(table(sim$truth$pattern_label[sim$truth$is_svg == 1]))
 # ------------------------------------------------------------
 # 2 model fitting and result saving
 # ------------------------------------------------------------
+seed = 11
+set.seed(seed)
+cat(paste("Seed is ", seed,"\n"))
+t1 = Sys.time()
 
-for (seed in 11) {#11
-  # seed = 5
-  set.seed(seed)
-  cat(paste("Seed is ", seed,"\n"))
-  t1 = Sys.time()
-  
-  fit_res <- GeoSVG3D(
-    Y = sim$Y, S = sim$S,
-    n_basis = 5, knn = 100,
-    n_iter = 2000, burn_in = 2000,
-    kappa_g = 0,
-    alpha_g = 10,
-    xi_g0 = 0,
-    prior = "SpSL-L",
-    xi_prop_sd = 1,
-    tau2_g_update = FALSE,
-    tau2_g_init = 1,
-    n_cores = 10,
-    seed = seed
-  )
-  t2 = Sys.time()
-  runtime = t2 - t1
-  print(runtime)
-  
-  p0g <- compute_p0g(fit_res, tol = 0)
-  bfdr_res <- select_svg_bfdr(p0g, alpha = alpha)
-  res_bfdr <- run_svg_bfdr_pipeline(
-    fit_res = fit_res,
-    truth = sim$is_svg, #toy_dat$is_svg,
-    alpha = alpha,
-    tol = 0
-  )
-  
-  print(res_bfdr$evaluation$stats)
-  print(res_bfdr$evaluation$confusion)
-}
+fit_res <- GeoSVG3D(
+  Y = sim$Y, S = sim$S,
+  n_basis = 5, knn = 100,
+  n_iter = 2000, burn_in = 2000,
+  kappa_g = 0,
+  alpha_g = 10,
+  xi_g0 = 0,
+  prior = "SpSL-L",
+  xi_prop_sd = 1,
+  tau2_g_update = FALSE,
+  tau2_g_init = 1,
+  n_cores = 10,
+  seed = seed
+)
+t2 = Sys.time()
+runtime = t2 - t1
+print(runtime)
+
+p0g <- compute_p0g(fit_res, tol = 0)
+bfdr_res <- select_svg_bfdr(p0g, alpha = alpha)
+res_bfdr <- run_svg_bfdr_pipeline(
+  fit_res = fit_res,
+  truth = sim$is_svg, #toy_dat$is_svg,
+  alpha = alpha,
+  tol = 0
+)
+
+print(res_bfdr$evaluation$stats)
+print(res_bfdr$evaluation$confusion)
 
 saveRDS(
   list(

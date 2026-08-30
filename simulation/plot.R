@@ -421,60 +421,6 @@ auc_scbsp <- as.numeric(auc(roc_scbsp))
 auc_spark <- as.numeric(auc(roc_spark))
 auc_sparkx <- as.numeric(auc(roc_sparkx))
 
-# draw_roc_curve <- function() {
-#   par(mar = c(5, 5, 3, 2))
-#   
-#   plot(
-#     roc_geosvg_df$FPR,
-#     roc_geosvg_df$TPR,
-#     type = "s",
-#     xlim = c(0, 0.5),
-#     ylim = c(0, 1),
-#     lwd = 2.5,
-#     col = "red",
-#     xlab = "False positive rate",
-#     ylab = "True positive rate",
-#     main = "ROC curve"
-#   )
-#   
-#   lines(
-#     roc_scbsp_df$FPR,
-#     roc_scbsp_df$TPR,
-#     type = "s",
-#     lwd = 2.5,
-#     col = "blue"
-#   )
-#   
-#   lines(
-#     roc_spark_df$FPR,
-#     roc_spark_df$TPR,
-#     type = "s",
-#     lwd = 2.5,
-#     col = "darkgreen"
-#   )
-#   
-#   lines(
-#     roc_sparkx_df$FPR,
-#     roc_sparkx_df$TPR,
-#     type = "s",
-#     lwd = 2.5,
-#     col = "purple"
-#   )
-#   
-#   legend(
-#     "bottomright",
-#     legend = c(
-#       paste0("GeoSVG-3D, AUC = ", sprintf("%.4f", auc_geosvg)),
-#       paste0("scBSP, AUC = ", sprintf("%.4f", auc_scbsp)),
-#       paste0("SPARK, AUC = ", sprintf("%.4f", auc_spark)),
-#       paste0("SPARK-X, AUC = ", sprintf("%.4f", auc_sparkx))
-#     ),
-#     col = c("red", "blue", 
-#             "darkgreen", "purple"),
-#     lwd = 2.5,
-#     bty = "n"
-#   )
-# }
 draw_roc_curve <- function() {
   par(mar = c(5, 5, 3, 2))
   

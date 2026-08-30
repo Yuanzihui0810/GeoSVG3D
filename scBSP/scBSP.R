@@ -150,8 +150,6 @@ cat("Number of genes after SpFilter:", nrow(Filtered_ExpMat), "\n")
 
 t1 <- Sys.time()
 
-# scbsp_bfdr_res <- which(P_values[,2]<0.05)
-# scbsp_svg_genes <- P_values[scbsp_bfdr_res,1]
 P_values <- scBSP(
   Coords_sub,
   Filtered_ExpMat

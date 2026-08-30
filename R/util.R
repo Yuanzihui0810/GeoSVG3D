@@ -319,7 +319,6 @@ GeoSVG3D <- function(
     # t2 = Sys.time()
     # print(t2-t1)
     
-    # ***** Later change to the following code *****
     pkg <- "GeoSVG3D"  # Package name
     
     parallel::clusterExport(cl, "pkg", envir = environment())
