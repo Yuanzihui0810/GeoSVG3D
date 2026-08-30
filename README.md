@@ -4,7 +4,7 @@ The R package **GeoSVG3D** is developed to implement GeoSVG-3D, a fully Bayesian
 
 More technical details can be found in:
 
-Yuan, Z., Yan, Y., and Luo, X. (2026). Geometry-aware Bayesian detection of spatially variable genes in three dimensions. *Statistical Learning and Data Science*. Accepted.
+Zihui Yuan., Yinqiao Yan, and Xiangyu Luo (2026) Geometry-aware Bayesian detection of spatially variable genes in three dimensions. *Statistical Learning and Data Science*. Accepted.
 
 ## Installation
 
@@ -31,7 +31,7 @@ The main fitting function expects:
 
 The rows of `Y` and `S` must correspond to the same cells or spots and appear in the same order. Spatial coordinates are internally scaled to `[0, 1]` along each dimension.
 
-The expression values should be continuous and appropriately preprocessed. With the raw count data and spatial coordinates, For the real-data analysis presented in the paper, raw count data are processed by quality control, library-size normalization, and a `log1p` transformation. STAGATE is subsequently used to impute zero expression values before the resulting continuous expression matrix is supplied to GeoSVG3D. The complete preprocessing and imputation workflow is provided in real_data/STAGATE_zero_imputation_DeepSTARmap.ipynb.
+The expression values should be continuous and appropriately preprocessed. For the real-data analysis presented in the paper, raw count data are processed by quality control, library-size normalization, and a `log1p` transformation. STAGATE is subsequently used to impute zero expression values before the resulting continuous expression matrix is supplied to GeoSVG3D. The complete preprocessing and imputation workflow is provided in real_data/STAGATE_zero_imputation_DeepSTARmap.ipynb.
 
 
 The other main arguments of the fitting function `GeoSVG3D()` are described below.
@@ -41,7 +41,7 @@ The other main arguments of the fitting function `GeoSVG3D()` are described belo
 -   `h`: the bandwidth of the Gaussian kernel used to define graph weights. If `NULL`, the median of the corresponding nearest-neighbor distances is used.
 -   `n_iter`: the number of retained MCMC iterations after burn-in.
 -   `burn_in`: the number of burn-in MCMC iterations.
--   `thin`: the thinning interval for retained MCMC samples.
+-   `thin`: the thinning value for retained MCMC samples.
 -   `kappa_g`: the spectral range parameter used in SPDE-inspired scaling.
 -   `alpha_g`: the spectral smoothness parameter used in SPDE-inspired scaling.
 -   `prior`: the neuronized prior specification, including Bayesian Lasso-type (`"BL"`), horseshoe-type (`"HS"`), and spike-and-slab-type priors (`"SpSL-L"`, `"SpSL-C"`, and `"SpSL-G"`).
