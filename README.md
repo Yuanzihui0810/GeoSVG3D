@@ -41,7 +41,7 @@ The other main arguments of the fitting function `GeoSVG3D()` are described belo
 -   `h`: the bandwidth of the Gaussian kernel used to define graph weights. If `NULL`, the median of the corresponding nearest-neighbor distances is used.
 -   `n_iter`: the number of retained MCMC iterations after burn-in.
 -   `burn_in`: the number of burn-in MCMC iterations.
--   `thin`: the thinning value for retained MCMC samples. "thin = n" means the interval between the two retained posterior samples is n-1.
+-   `thin`: the thinning interval for retaining MCMC samples. A value of thin = n means that every (n)-th MCMC sample is retained, with (n-1) samples discarded between two consecutive retained samples.
 -   `kappa_g`: the spectral range parameter used in SPDE-inspired scaling.
 -   `alpha_g`: the spectral smoothness parameter used in SPDE-inspired scaling.
 -   `prior`: the neuronized prior specification, including Bayesian Lasso-type (`"BL"`), horseshoe-type (`"HS"`), and spike-and-slab priors,  where the spike is a Dirac point mass at zero ($\delta_0$) and the slab is Laplace-like (`"SpSL-L"`), Cauchy (`"SpSL-C"`), or Gaussian (`"SpSL-G"`).
